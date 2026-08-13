@@ -1,0 +1,92 @@
+
+
+.sheet{
+  --f-display:ui-sans-serif,system-ui,"Helvetica Neue",Arial,sans-serif;
+  --f-body:ui-sans-serif,system-ui,"Helvetica Neue",Arial,sans-serif;
+  --f-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --measure:78ch;
+  --signal:var(--ink);
+  --signal-mark:var(--ink-3);
+  --signal-wash:var(--sunk);
+  font-family:var(--f-body);
+  border-left:none;border-right:none;max-width:920px;
+}
+.scale{display:none;}
+
+.name{font-weight:700;font-stretch:normal;font-size:clamp(2rem,5vw,2.6rem);letter-spacing:-.01em;}
+.title-line{font-family:var(--f-body);font-size:.95rem;font-weight:400;
+  letter-spacing:0;text-transform:none;color:var(--ink-2);}
+.contact{font-family:var(--f-body);font-size:.88rem;gap:0 1rem;}
+.contact li::before{display:none;}
+.contact li:not(:last-child)::after{content:"\00B7";margin-left:1rem;color:var(--ink-3);}
+
+.band{display:block;background:none;border:none;padding:0 var(--pad) 4px;}
+.band-cap{letter-spacing:.08em;padding-bottom:6px;}
+.metric{display:block;border:none!important;padding:1px 0!important;}
+.metric .v{display:inline;font-family:var(--f-body);font-weight:700;
+  font-size:1rem;font-stretch:normal;letter-spacing:0;color:var(--ink);}
+.metric .v small{font-size:1em;font-weight:700;opacity:1;}
+.metric .l{display:inline;max-width:none;font-family:var(--f-body);font-size:.9rem;
+  letter-spacing:0;text-transform:none;color:var(--ink-2);}
+.metric .l::before{content:" ";}
+
+.sec-head{border-bottom:1px solid var(--rule);}
+.sec-head h2{font-weight:700;font-stretch:normal;font-size:1.05rem;letter-spacing:.06em;}
+
+.role{display:block;}
+.role-meta{display:flex;flex-wrap:wrap;gap:.3rem .9rem;font-family:var(--f-body);
+  font-size:.85rem;margin-bottom:.2rem;}
+.role-meta .dates{letter-spacing:0;}
+.role-meta .where,.role-meta .tag,.stacks{margin-top:0;}
+.role-meta .tag{font-family:var(--f-body);letter-spacing:0;text-transform:none;
+  border:none;background:none;padding:0;font-size:.85rem;}
+.role-meta .tag::before{content:"(";}
+.role-meta .tag::after{content:")";}
+.stacks span,.stacks span.on{font-family:var(--f-body);font-size:.85rem;font-weight:400;
+  letter-spacing:0;text-transform:none;border:none;background:none;padding:0;color:var(--ink-2);}
+.stacks span:not(:last-child)::after{content:",";}
+.role-head h3{font-weight:700;font-stretch:normal;font-size:1.12rem;}
+.role-head .org{font-weight:400;color:var(--ink-2);}
+.role-head .org::before{content:"\2014\00A0";}
+.role-note{font-family:var(--f-body);font-size:.88rem;letter-spacing:0;}
+.group-head{font-family:var(--f-body);font-size:.9rem;font-weight:700;
+  letter-spacing:0;text-transform:none;}
+.group-head::before{display:none;}
+.bullets li::before{content:"\2022";background:none;width:auto;height:auto;
+  top:0;color:var(--ink-3);}
+
+.hi{background:none;border:1px solid var(--rule);}
+.hi li{grid-template-columns:auto minmax(0,1fr);}
+.hi li .k{font-family:var(--f-body);font-weight:700;font-stretch:normal;
+  color:var(--ink);font-size:.95rem;}
+
+.caps{border-top:none;}
+.cap{display:block;padding:.3rem 0;}
+.cap dt{display:inline;font-family:var(--f-body);font-size:.9rem;font-weight:700;
+  letter-spacing:0;text-transform:none;color:var(--ink);}
+.cap dt::after{content:":\00A0";}
+.cap dd{display:inline;font-size:.9rem;}
+
+.colophon{background:none;}
+.colophon h3{font-family:var(--f-body);font-size:.9rem;font-weight:700;
+  letter-spacing:0;text-transform:none;color:var(--ink);}
+.colophon .s{font-family:var(--f-body);font-size:.82rem;}
+
+@media print{
+  
+  .name{font-size:20pt;}
+  .band{padding:0;}
+  .metric{padding:1px 0!important;}
+  .metric .v{font-size:9.6pt;}
+  .metric .l{font-size:9.6pt;}
+  .cap{grid-template-columns:none;padding:2pt 0;}
+  .sheet.compact .cap dt::after{content:":\00A0";}
+  .role-head .org::before{content:"\2014\00A0";}
+  
+  .sheet.compact .cap{padding:1.2pt 0;}
+  .sheet.compact .role{padding:3pt 0 4pt;}
+  .sheet.compact .colophon{margin-top:5pt;padding:5pt 0 0;}
+  .sheet.compact .colophon ul{gap:.16rem;}
+  .sheet.compact .colophon li{line-height:1.26;}
+  .sheet.compact .colophon .s{font-size:.78rem;}
+}

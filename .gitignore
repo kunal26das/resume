@@ -1,0 +1,15 @@
+# Editor
+.idea/
+
+# macOS
+.DS_Store
+
+# Python
+src/__pycache__/
+
+# Generated on demand, never committed
+*.pdf
+out/
+
+# Kept local, never published
+archive/
