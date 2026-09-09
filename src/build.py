@@ -530,7 +530,7 @@ def emit_live(source_body, title_src):
         body += f"\n<script>\n{script(name)}</script>"
     title = ascii_only(title_src)
     text = page(body, title, url=SITE_URL, canonical=SITE_URL,
-                attrs=' data-len="short" data-layout="datasheet" data-lead=""')
+                attrs=' data-len="full" data-layout="datasheet" data-lead=""')
     (ROOT / "index.html").write_text(text, encoding="utf-8")
     print(f"{'index.html':<30}{len(text)/1024:>6.0f} KB  "
           f"({masked} contact entries masked)")

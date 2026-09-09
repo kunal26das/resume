@@ -16,10 +16,10 @@ my machine: drop the subtrees a shorter version does not admit, join the bullets
 into their neighbour, re-count the sentences that count themselves. About 340 KB, no network calls,
 no framework.
 
-The opening view is the two-page resume. **Full** expands it into the detailed career
-record. The datasheet layout leads with platform ownership, three concrete proof points,
-and a concise skills summary; the shorter copies also describe the DOOM port rather than
-reducing it to a project name and link.
+The opening view is **Full**, the detailed career record. **Two-page** and **One-page**
+provide shorter copies. The datasheet layout leads with platform ownership and three
+concrete proof points; the shorter copies use a concise skills summary and describe the
+DOOM port rather than reducing it to a project name and link.
 
 The controls live in a panel down the left edge, behind a chip in the corner on a narrow
 screen. It sits outside the resume — appended to the page, never mounted inside the document
