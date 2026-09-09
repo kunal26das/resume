@@ -601,22 +601,18 @@ mark{background:var(--signal-wash);color:var(--ink);border-radius:1px;}
     </ul>
   </header>
 
-  <section class="band" data-td="3">
-    <p class="band-cap" data-t="0"><span class="n-roles">Five</span> production codebases &mdash; <span class="n-span">six years</span>, <span class="n-from">2020</span> &rarr; present</p>
-    <div class="metric" data-t="0" data-org="licious"><span class="v"><small>#</small>1</span><span class="l">Contributor on Android <em>and</em> on iOS <em>&middot;</em> Licious, team of 63</span></div>
-    <div class="metric" data-t="0"><span class="v">4</span><span class="l">Codebases whose module graph I created</span></div>
-    <div class="metric"><span class="v">20</span><span class="l">Gradle build scripts in the repo <em>&mdash;</em> every one of them mine</span></div>
-    <div class="metric" data-org="wish"><span class="v">8</span><span class="l">Kotlin Multiplatform modules built <em>&middot;</em> Wish</span></div>
-    <div class="metric" data-t="2" data-org="wish"><span class="v">2<small>&rarr;</small>1</span><span class="l">Platform repositories merged into one <em>&middot;</em> Wish</span></div>
-    <div class="metric"><span class="v">7<small> mo</small></span><span class="l">Of error reporting silently broken &mdash; found and fixed</span></div>
-    <div class="metric"><span class="v">26</span><span class="l">Engineers whose pull requests I review</span></div>
-    <div class="metric" data-t="2"><span class="v">5</span><span class="l">Apps shipped to the stores</span></div>
+  <section class="summary" data-td="3">
+    <p class="positioning" data-t="0">I build the platforms mobile teams ship on.</p>
+    <p data-t="0"><span class="n-years">Six</span> years of mobile engineering across Android, iOS and React&nbsp;Native. Created the module architecture of four production codebases and shipped shared infrastructure in Kotlin, Swift and TypeScript.</p>
+    <p>At <strong>Licious</strong>, I am the <strong>#1 contributor to both the Android and iOS codebases</strong> on a team of 63 engineers, having joined for Android. I have migrated a production codebase entirely from Java to Kotlin and independently built two companies&rsquo; chat products.<c data-org="wish"> On contract at <strong>Wish</strong>, I merged the Android and iOS repositories, built their shared <strong>Kotlin Multiplatform layer</strong> and shipped a Compose Multiplatform screen to both app stores.</c></p>
+    <p>Simplified production infrastructure by removing <strong>six third&#8209;party SDKs</strong> and a custom crash handler that concealed failures. Introduced and later removed an entire monitoring vendor through a shared interface, without changing product code.</p>
   </section>
 
-  <section class="summary" data-td="3">
-    <p data-t="0">Mobile engineer, <span class="n-years">six</span> years in, shipping production Kotlin, Swift and TypeScript into the same repository. I build the layer underneath mobile products &mdash; the Gradle build, the React&nbsp;Native runtime, cold&#8209;start instrumentation, the crash programme, the release train<c data-t="3"> &mdash; and I work across all three stacks because that layer does not respect platform boundaries</c>.</p>
-    <p data-t="1" data-join=" ">At <strong>Licious</strong>, India&rsquo;s largest D2C fresh&#8209;meat brand, I am the <strong>single largest contributor to both the Android and the iOS codebases</strong>, on a team of sixty&#8209;three engineers. I was not hired for iOS.<c data-t="3"> The pattern is older than this job: I have created the module graph of four production codebases, taken one of them off Java entirely, and built two companies&rsquo; chat products single&#8209;handed.</c><c data-org="wish"> On contract at <strong>Wish</strong> I merged the company&rsquo;s iOS and Android repositories into one and built the <strong>Kotlin Multiplatform layer between them</strong>, shipping a Compose Multiplatform surface to both app stores from a single source.</c></p>
-    <p>A good share of that is subtraction. <strong>Six third&#8209;party SDKs out of the shipping app</strong>, a homegrown crash handler that was quietly hiding crashes from reporting, an entire monitoring vendor added and taken out again without touching a line of product code. Fewer moving parts, and fewer places for the app to fail without anyone noticing.</p>
+  <section class="band">
+    <p class="band-cap"><span class="n-roles">Five</span> production codebases &mdash; <span class="n-span">six years</span>, <span class="n-from">2020</span> &rarr; present</p>
+    <div class="metric" data-org="licious"><span class="v"><small>#</small>1</span><span class="l">Contributor on both Android and iOS at Licious &middot; team of 63 engineers</span></div>
+    <div class="metric" data-org="licious"><span class="v">12<small>/</small>13</span><span class="l">Licious app modules I created from a 1,679&#8209;file monolith</span></div>
+    <div class="metric" data-org="licious"><span class="v">8</span><span class="l">Other engineers shipped 7 more trackers on my startup package</span></div>
   </section>
 
   <section data-t="3">
@@ -624,14 +620,14 @@ mark{background:var(--signal-wash);color:var(--ink);border-radius:1px;}
     <div class="hi">
       <h3>The <span class="n-hi">eight</span> I would lead with</h3>
       <ul>
-        <li><span class="k">8&rarr;7</span><span>The only engineer in the Licious repository&rsquo;s history to have raised React&nbsp;Native&rsquo;s version. Eight bumps <strong>0.72.3 &rarr; 0.77.3</strong> shipped to production; a further seven, <strong>0.77.3 &rarr; 0.84.1</strong> including the mandatory <strong>New&nbsp;Architecture cutover</strong>, green on both platforms and awaiting merge.</span></li>
-        <li data-org="wish"><span class="k">2&rarr;1</span><span>Repositories merged into one at <strong>Wish</strong>, then an 8&#8209;module <strong>Kotlin Multiplatform</strong> layer built between them and a <strong>Compose Multiplatform</strong> screen shipped to both stores from one source.</span></li>
-        <li data-org="alle"><span class="k">68%</span><span>Of the 28 Gradle modules in <strong>Alle</strong> are framework&#8209;free JVM libraries with no Android dependency &mdash; the layering enforced by the build graph, not by convention.</span></li>
-        <li><span class="k">3&times;</span><span>Implementations of a single 15&#8209;method observability contract &mdash; Kotlin, Swift, TypeScript &mdash; behind which an entire APM vendor was added and later removed without touching product code.</span></li>
-        <li><span class="k">7 mo</span><span>How long the app had been discarding <strong>100% of its error reports</strong> before they were sent, because of a filter nobody knew was there. I found it and removed it.</span></li>
-        <li data-org="powerplay"><span class="k">0</span><span>Java files left in the <strong>Powerplay</strong> codebase after I migrated it &mdash; <span class="n">1,246</span> Kotlin files across 14 modules.</span></li>
-        <li><span class="k">5</span><span>Release rules encoded as executable policy in the <strong>RevoPush Release Console</strong>, built solo &mdash; login gate, version match, one base release per version, base&#8209;before&#8209;OTA, single&#8209;operation lock.</span></li>
-        <li><span class="k">8</span><span>Other engineers now shipping on the cold&#8209;start measurement package I created at <strong>Licious</strong>, with <span class="n">7</span> further trackers built on it since.</span></li>
+        <li data-tag="rn build platform"><span class="k">8&rarr;7</span><span>React&nbsp;Native upgrades at <strong>Licious</strong>: eight bumps from <strong>0.72.3 &rarr; 0.77.3</strong> shipped to production. A further seven, <strong>0.77.3 &rarr; 0.84.1</strong>, including the mandatory <strong>New&nbsp;Architecture cutover</strong>, are green on the branch on both platforms and awaiting merge.</span></li>
+        <li data-tag="kmp build ui platform" data-org="wish"><span class="k">2&rarr;1</span><span>Repositories merged into one at <strong>Wish</strong>, then an 8&#8209;module <strong>Kotlin Multiplatform</strong> layer built between them and a <strong>Compose Multiplatform</strong> screen shipped to both stores from one source.</span></li>
+        <li data-tag="android build platform" data-org="alle"><span class="k">68%</span><span>Of the 28 Gradle modules in <strong>Alle</strong> are framework&#8209;free JVM libraries with no Android dependency &mdash; the layering enforced by the build graph, not by convention.</span></li>
+        <li data-tag="platform reliability android ios rn"><span class="k">3&times;</span><span>Implementations of a single 15&#8209;method observability contract &mdash; Kotlin, Swift, TypeScript &mdash; behind which an entire APM vendor was added and later removed without touching product code.</span></li>
+        <li data-tag="reliability"><span class="k">7 mo</span><span>Restored error reporting after finding and removing a filter that had silently discarded <strong>100% of reports</strong> for seven months.</span></li>
+        <li data-tag="android build platform" data-org="powerplay"><span class="k">0</span><span>Java files left in the <strong>Powerplay</strong> codebase after I migrated it &mdash; <span class="n">1,246</span> Kotlin files across 14 modules.</span></li>
+        <li data-tag="rn release platform"><span class="k">5</span><span>Release rules encoded as executable policy in the <strong>RevoPush Release Console</strong>, built solo &mdash; login gate, version match, one base release per version, base&#8209;before&#8209;OTA, single&#8209;operation lock.</span></li>
+        <li data-tag="perf platform"><span class="k">8</span><span>Other engineers now shipping on the cold&#8209;start measurement package I created at <strong>Licious</strong>, with <span class="n">7</span> further trackers built on it since.</span></li>
       </ul>
     </div>
   </section>
@@ -649,20 +645,33 @@ mark{background:var(--signal-wash);color:var(--ink);border-radius:1px;}
         <p class="role-note">D2C fresh meat &amp; seafood commerce &mdash; a hybrid app with Android, iOS and React&nbsp;Native in one repository</p>
 
         <div class="group">
+          <h4 class="group-head" data-t="3">Build Systems &amp; Architecture</h4>
+          <ul class="bullets" data-td="3">
+            <li data-tag="build android" data-t="0"><strong>Authored every Gradle build script and created 12 of the app&rsquo;s 13 modules</strong>, decomposing a 1,679&#8209;file monolith into monitoring, preferences, attribution, in&#8209;app updates and dependency&#8209;injection libraries<c data-t="3">, each paired with a plain&#8209;Kotlin core with no Android dependency</c>.</li>
+            <li data-lead="platform" data-tag="platform build">Replaced a <span class="n">452</span>&#8209;line Groovy build file with a <span class="n">128</span>&#8209;line Kotlin one, so 13 modules across 6 build variants are configured from a single place, and <span class="n">194</span> hand&#8209;maintained settings became one definition the compiler checks &mdash; a wrong environment value is now a build failure rather than a bug found in production.</li>
+            <li data-tag="build" data-t="1" data-join=" "><strong>Owned dependencies on both platforms</strong>: the Android version catalogue, module list and iOS Podfile.</li>
+            <li data-lead="android" data-tag="build android">Landed the Android Gradle Plugin 7&rarr;8 migration as one reviewed change, moving Gradle, Kotlin, Java and the annotation processor at the same time &mdash; absorbing every breaking change by hand across 1,253 Kotlin and 426 Java files, on a branch kept current through four months of everyone else&rsquo;s work.</li>
+            <li data-tag="build android">Deleted the entire local&#8209;database layer &mdash; a hand&#8209;written store and two Room databases across 71 files &mdash; after finding nothing in it needed to survive a restart. Kept the interfaces in place so every place that used it carried on compiling unchanged.</li>
+            <li data-tag="build">Cleared out what the build was still carrying and paying for: three dead build flavours, a Tag Manager container set, already&#8209;broken tests and a checked&#8209;in IDE workspace. Every reference traced before removal &mdash; one purge touched <span class="n">217</span> files without adding a single line.</li>
+            <li data-lead="platform" data-tag="platform build" data-t="2" data-join=" ">Decommissioned six third&#8209;party SDKs outright<c data-t="3"> &mdash; CleverTap alone carried an entire dead notification centre behind it &mdash;</c> while the app kept shipping.</li>
+            <li data-tag="build release">Collapsed three hand&#8209;maintained version declarations across npm, Gradle and Xcode into a single source of truth, propagated automatically into every target and build configuration.</li>
+          </ul>
+        </div>
+        <div class="group">
           <h4 class="group-head" data-t="3">iOS &mdash; hired for Android, now its top contributor</h4>
           <ul class="bullets" data-td="3">
-            <li data-tag="ios" data-t="0"><strong>#1 contributor to the iOS codebase</strong>, and the owner of its build configuration &mdash; the Xcode project and the dependency lockfile are both mine to maintain.</li>
+            <li data-tag="ios" data-t="0"><strong>#1 contributor to the iOS codebase</strong> and owner of its build configuration, including the Xcode project and dependency lockfile.</li>
             <li data-lead="ios" data-tag="ios">Rewrote how the iOS app starts. The launch screen had been a fake image drawn on top of the tab bar; it is now a real first screen the app boots into, which removed a class of bugs where the app was interactive before it looked ready.</li>
             <li data-tag="ios android">Brought two Android systems across to iOS: the startup framework, rebuilt in Swift so that everything the app initialises on launch declares what it depends on and runs in parallel where it can, and the monitoring module, which now records which screen the user was on when a crash happened.</li>
-            <li data-lead="ios" data-tag="ios build" data-t="1" data-join=" ">Got the iOS build running natively on Apple Silicon by removing an obsolete payments library that had been forcing every engineer&rsquo;s simulator into emulation.<c data-t="3"> Also carried Facebook&rsquo;s SDK across four major versions and moved Firebase onto Swift Package Manager.</c></li>
+            <li data-lead="ios" data-tag="ios build" data-t="1" data-join=" ">Enabled native Apple Silicon builds by removing an obsolete payments library that forced iOS simulators into emulation.<c data-t="3"> Also carried Facebook&rsquo;s SDK across four major versions and moved Firebase onto Swift Package Manager.</c></li>
             <li data-tag="ios product">Fixed marketing links on iOS, where five kinds of campaign link opened the app but dropped the user on the home screen instead of the page they had tapped. Routed all <span class="n">7</span> ways the app can be opened through a single path, bringing iOS level with Android.</li>
           </ul>
         </div>
         <div class="group">
           <h4 class="group-head" data-t="3">React Native Platform</h4>
           <ul class="bullets" data-td="3">
-            <li data-tag="rn build" data-t="0"><c data-only="short">The only engineer in the repository&rsquo;s history to have raised React&nbsp;Native&rsquo;s version. </c>Shipped the <span class="n">0.72.3 &rarr; 0.77.3</span> upgrade to production, carrying the whole Android toolchain &mdash; Gradle, Kotlin and the target SDK &mdash; forward inside the same change.</li>
-            <li data-lead="rn" data-tag="rn build" data-t="1" data-join=" ">Authored the follow&#8209;on <span class="n">0.77.3 &rarr; 0.84.1</span> ladder as <span class="n">7</span> independently buildable hops, one per minor<c data-t="3">, each with a written analysis of what broke and why</c> &mdash; including React&nbsp;Native 0.82&rsquo;s mandatory New Architecture migration<c data-t="3">, which no published guide covers for an app like ours, where native code owns the screens and React&nbsp;Native is embedded inside it</c>. Both platforms green on the branch.</li>
+            <li data-tag="rn build" data-t="0">Shipped React&nbsp;Native <span class="n">0.72.3 &rarr; 0.77.3</span> to production, upgrading Gradle, Kotlin and the Android target SDK in the same change.</li>
+            <li data-lead="rn" data-tag="rn build" data-t="1" data-join=" ">Authored the follow&#8209;on <span class="n">0.77.3 &rarr; 0.84.1</span> upgrade as <span class="n">7</span> independently buildable steps<c data-t="3">, each with a written analysis of breaking changes</c>, including React&nbsp;Native 0.82&rsquo;s mandatory New Architecture migration<c data-t="3"> for a hybrid app where native code owns the screens and embeds React&nbsp;Native</c>. Both platforms green on the branch; awaiting merge.</li>
             <li data-lead="platform" data-tag="platform rn build">Found why the JavaScript bundle broke on both platforms after a routine upgrade: a config file had been overwriting the bundler&rsquo;s defaults instead of adding to them, silently dropping <span class="n">17</span> of them. Harmless for two years, fatal the moment the bundler changed how it resolves packages. One&#8209;line fix, with the two obvious alternatives written up and rejected in the commit.</li>
             <li data-lead="rn" data-tag="rn">Built the hosting layer the entire hybrid app runs on &mdash; the code that lets <span class="n">21</span> React&nbsp;Native screens open from native Android and iOS, receive the data they need, and report back what the user did.</li>
             <li data-tag="rn">Replaced the loosely typed hand&#8209;off between native code and React&nbsp;Native with a checked one, so a misspelled key is now a build error instead of a blank screen. The same <span class="n">200</span>&#8209;function contract, written in Kotlin, Swift and TypeScript, covering 36 areas of app state.</li>
@@ -673,8 +682,8 @@ mark{background:var(--signal-wash);color:var(--ink);border-radius:1px;}
           <h4 class="group-head" data-t="3">Reliability</h4>
           <ul class="bullets" data-td="3">
             <li data-tag="reliability">Ran the crash and app&#8209;freeze programme across all three stacks, over <span class="n">16</span> releases.</li>
-            <li data-tag="reliability" data-t="0">Found that the app had been reporting almost no errors for seven months &mdash; not because there were none, but because a filter in the reporting setup was <strong>silently discarding 100% of them</strong> before they were sent. Removed it, and put all three platforms on one version of the tool.</li>
-            <li data-tag="reliability" data-t="1" data-join=" ">Deleted the app&rsquo;s homegrown crash handler, which caught crashes, quietly restarted the app and hid them from crash reporting, and replaced it with a trail of what the user was doing before the crash.</li>
+            <li data-tag="reliability" data-t="0">Restored error reporting after finding a filter that had <strong>silently discarded 100% of reports</strong> for seven months. Removed the filter and standardised the reporting SDK across Android, iOS and React&nbsp;Native.</li>
+            <li data-tag="reliability" data-t="1" data-join=" ">Replaced a custom crash handler that hid failures with a record of user actions leading up to each crash.</li>
             <li data-tag="reliability android ios">Fixed a startup hang where the splash screen and the JavaScript runtime could both try to hand off to each other at once, leaving the user stuck. Shipped in Kotlin and Swift the same day, and unchanged six months later.</li>
             <li data-tag="reliability">Closed a family of <span class="n">6</span> related crashes at the cause rather than the symptom, and removed a freeze caused by address lookups blocking the main thread &mdash; by replacing the API in all twelve places it was used, rather than patching each caller.</li>
             <li data-tag="reliability">Removed generated startup code that retried ten times on the main thread and wrote user IDs, internal URLs and full experiment data into the device log on every launch.</li>
@@ -683,25 +692,12 @@ mark{background:var(--signal-wash);color:var(--ink);border-radius:1px;}
         <div class="group">
           <h4 class="group-head" data-t="3">Performance &amp; Observability</h4>
           <ul class="bullets" data-td="3">
-            <li data-lead="platform" data-tag="platform perf" data-t="2"><strong>Eight other engineers have since shipped seven more trackers on the package I created</strong> &mdash; the measurement layer outlived the measurement.</li>
+            <li data-lead="platform" data-tag="platform perf" data-t="2">Created the startup measurement package on which <strong>eight other engineers have since shipped seven additional trackers</strong>.</li>
             <li data-lead="platform" data-tag="platform perf" data-t="2" data-join=" ">Designed one monitoring interface and implemented it <strong>three times &mdash; Kotlin, Swift and TypeScript</strong> &mdash; so that Firebase, Sentry and New&nbsp;Relic sit behind it interchangeably. Proved it by adding New&nbsp;Relic across all three platforms and removing it again four months later<c data-t="3">: the removal touched the monitoring module and nothing else</c>.</li>
             <li data-tag="perf">Built the company&rsquo;s startup&#8209;time measurement platform: <span class="n">5</span> checkpoints from tap to usable screen<c data-t="3">, recorded on two parallel timelines so React&nbsp;Native and native screens could be compared like for like</c>. Written for all three platforms in one change.</li>
             <li data-tag="perf android">Shortened the Android startup path: took the launch animation off it entirely, rebuilt the splash screen and its data layer at less than half their former size, and replaced a hard&#8209;coded minimum splash delay with a value the team can tune remotely.</li>
             <li data-tag="perf android">Killed homepage scroll stutter by deleting 12 per&#8209;widget configuration classes and four pieces of work that ran on the main thread on every scroll, then reusing view instances across <span class="n">111</span> layouts.</li>
             <li data-tag="perf">Instrumented all <span class="n">18</span> homepage widget types individually for render time, and wrote six of the seven things the app initialises at startup &mdash; each reporting its own timing at no cost to the code that calls it.</li>
-          </ul>
-        </div>
-        <div class="group">
-          <h4 class="group-head" data-t="3">Build Systems &amp; Architecture</h4>
-          <ul class="bullets" data-td="3">
-            <li data-tag="build android" data-t="0"><strong>I wrote every Gradle build script in the repository, and created 12 of the 13 modules in the shipped app</strong> &mdash; breaking a 1,679&#8209;file monolith into separate libraries for monitoring, preferences, attribution, in&#8209;app updates and dependency injection<c data-t="3">, each paired with a plain&#8209;Kotlin core that has no Android dependency at all</c>.</li>
-            <li data-lead="platform" data-tag="platform build"><strong>The build layer every other engineer now works against is mine.</strong> Replaced a <span class="n">452</span>&#8209;line Groovy build file with a <span class="n">128</span>&#8209;line Kotlin one, so 13 modules across 6 build variants are configured from a single place, and <span class="n">194</span> hand&#8209;maintained settings became one definition the compiler checks &mdash; a wrong environment value is now a build failure rather than a bug found in production.</li>
-            <li data-tag="build" data-t="1" data-join=" "><strong>Sole owner of the dependency surface on both platforms</strong> &mdash; the Android version catalogue, the module list and the iOS Podfile all change through me.</li>
-            <li data-lead="android" data-tag="build android">Landed the Android Gradle Plugin 7&rarr;8 migration as one reviewed change, moving Gradle, Kotlin, Java and the annotation processor at the same time &mdash; absorbing every breaking change by hand across 1,253 Kotlin and 426 Java files, on a branch kept current through four months of everyone else&rsquo;s work.</li>
-            <li data-tag="build android">Deleted the entire local&#8209;database layer &mdash; a hand&#8209;written store and two Room databases across 71 files &mdash; after finding nothing in it needed to survive a restart. Kept the interfaces in place so every place that used it carried on compiling unchanged.</li>
-            <li data-tag="build">Cleared out what the build was still carrying and paying for: three dead build flavours, a Tag Manager container set, already&#8209;broken tests and a checked&#8209;in IDE workspace. Every reference traced before removal &mdash; one purge touched <span class="n">217</span> files without adding a single line.</li>
-            <li data-lead="platform" data-tag="platform build" data-t="2" data-join=" ">Decommissioned six third&#8209;party SDKs outright<c data-t="3"> &mdash; CleverTap alone carried an entire dead notification centre behind it &mdash;</c> while the app kept shipping.</li>
-            <li data-tag="build release">Collapsed three hand&#8209;maintained version declarations across npm, Gradle and Xcode into a single source of truth, propagated automatically into every target and build configuration.</li>
           </ul>
         </div>
         <div class="group">
@@ -792,7 +788,7 @@ mark{background:var(--signal-wash);color:var(--ink);border-radius:1px;}
         <div class="group">
           <h4 class="group-head" data-t="3">The AI Stylist</h4>
           <ul class="bullets" data-td="3">
-            <li data-tag="ai product" data-t="1">Built &ldquo;Ask Alle&rdquo;, the product&rsquo;s reason to exist: a streaming AI stylist that renders the answer word by word as it arrives, assembles it into <span class="n">3</span> kinds of rich content block<c data-t="3">, falls back safely if a partial update is malformed</c>, and measures time&#8209;to&#8209;first&#8209;word on every single turn.</li>
+            <li data-tag="ai product" data-t="1">Built &ldquo;Ask Alle&rdquo;, a streaming AI stylist with word&#8209;by&#8209;word responses, <span class="n">3</span> rich&#8209;content block types and time&#8209;to&#8209;first&#8209;word measurement on every turn<c data-t="3">, with safe fallback for malformed partial updates</c>.</li>
             <li data-tag="ai reliability">Made a dropped connection recoverable rather than fatal: any answer cut off mid&#8209;stream is marked as incomplete rather than left hanging, and can be regenerated from where it started &mdash; so a lift ride does not cost the user their answer.</li>
             <li data-tag="ai product ui">Shipped everything around it &mdash; thread history with server&#8209;grouped sections and last&#8209;thread resume, image attachment behind a one&#8209;time privacy acknowledgement, binary feedback that escalates into a server&#8209;defined form, and a paged, tabbed drill&#8209;down from an inline ideas strip into full browse.</li>
           </ul>
@@ -833,7 +829,7 @@ mark{background:var(--signal-wash);color:var(--ink);border-radius:1px;}
         <div class="group">
           <h4 class="group-head" data-t="3">Feed Media Performance</h4>
           <ul class="bullets" data-td="3">
-            <li data-lead="product" data-tag="product perf" data-t="2">Built the timeline&rsquo;s image prefetcher, which loads images <span class="n">200</span> posts ahead of where the reader is and tops itself up as they scroll<c data-t="3">, requesting each image at the exact size it will be displayed across <span class="n">5</span> media types</c> &mdash; wired into all <span class="n">4</span> feeds: timeline, profile, post detail and search.</li>
+            <li data-tag="product perf" data-t="0">Built image prefetching across all <span class="n">4</span> feeds &mdash; timeline, profile, post detail and search &mdash; loading images <span class="n">200</span> posts ahead and replenishing as users scroll<c data-t="3">, with exact display&#8209;size requests across <span class="n">5</span> media types</c>.</li>
             <li data-tag="perf">Tuned the image caching a media&#8209;heavy timeline actually needs: a <span class="n">50&nbsp;MB</span> memory cache that automatically drops to lower&#8209;quality images on devices running short of memory, a <span class="n">100&nbsp;MB</span> disk cache on a modern HTTP stack, and CDN cache headers honoured rather than ignored.</li>
             <li data-tag="perf" data-t="2" data-join=" ">Put <strong>image&#8209;format negotiation into every request</strong>, so the CDN could start serving smaller modern image formats to a chosen slice of users &mdash; switched on server&#8209;side, per cohort, without shipping an app at all.</li>
           </ul>
@@ -881,7 +877,7 @@ mark{background:var(--signal-wash);color:var(--ink);border-radius:1px;}
           <h4 class="group-head" data-t="3">In&#8209;app Chat, Built Alone</h4>
           <ul class="bullets" data-td="3">
             <li data-tag="chat product" data-t="0">Built the <strong>entire in&#8209;app chat product single&#8209;handed</strong> &mdash; its own module covering <span class="n">7</span> screens and 6 kinds of message, localised into <span class="n">12</span> Indian languages.</li>
-            <li data-tag="chat product" data-t="1" data-join=" ">Delivered the depth people silently expect from WhatsApp: typing indicators, read <em>and</em> delivery receipts with per&#8209;message tri&#8209;state ticks<c data-t="3">, a read/unread/not&#8209;yet&#8209;installed message&#8209;info screen, @mentions paged over Sendbird&rsquo;s member&#8209;search endpoint, swipe&#8209;to&#8209;reply, multi&#8209;channel forwarding</c>, and soft and hard delete.</li>
+            <li data-tag="chat product" data-t="1" data-join=" ">Implemented typing indicators, read <em>and</em> delivery receipts with per&#8209;message tri&#8209;state ticks<c data-t="3">, a read/unread/not&#8209;yet&#8209;installed message&#8209;info screen, @mentions paged over Sendbird&rsquo;s member&#8209;search endpoint, swipe&#8209;to&#8209;reply, multi&#8209;channel forwarding</c>, and soft and hard delete.</li>
             <li data-tag="chat reliability">Made it survive bad networks and the app being killed in the background: nothing loads against a dead connection, delivery receipts are sent reliably whether the app is open or not, and push notifications route correctly from all three systems that could send them.</li>
             <li data-tag="chat product">Modelled <span class="n">5</span> construction&#8209;specific message types &mdash; task, material request, progress report, image and system &mdash; as structured messages, so a site update arrives as something the app can render and act on rather than a paragraph of text.</li>
           </ul>
@@ -891,7 +887,7 @@ mark{background:var(--signal-wash);color:var(--ink);border-radius:1px;}
           <h4 class="group-head" data-t="3">Growth, Onboarding &amp; Experiments</h4>
           <ul class="bullets" data-td="3">
             <li data-tag="product analytics">Built the onboarding flow end to end and rebuilt it as the product learned: a questionnaire whose length and validation the backend controls, and a submit path that reports success to all four analytics vendors, replays whatever events the server names, and refreshes configuration so a new user lands in the right experiment immediately.</li>
-            <li data-tag="product analytics" data-t="0"><strong>Built the attribution behind the campaign that took the product to 50,000 users in one month:</strong> Play Install Referrer captured exactly once per user, UTM parameters decoded into their own store, and the acquisition source then attached automatically to all <span class="n">1,308</span> places the app records an event.<c data-t="3"> Outbound, UTM&#8209;tagged dynamic links carry the same parameters back through the Play Store install, closing the loop.</c></li>
+            <li data-tag="product analytics" data-t="0"><strong>Built the attribution behind the campaign that took the product to 50,000 users in one month:</strong> captured Play Install Referrer once per user, stored UTM parameters and automatically attached acquisition source to all <span class="n">1,308</span> analytics call sites.<c data-t="3"> Outbound, UTM&#8209;tagged dynamic links carry the same parameters back through the Play Store install, closing the loop.</c></li>
             <li data-lead="product" data-tag="product analytics">Ran experimentation as a platform, not a habit: <span class="n">61</span> feature flags across five product teams, with a global hold&#8209;out group and automatic exposure tracking so every experiment is analysable without extra work &mdash; and a registry of 45 experiments, 14 live and 31 retired with written reasoning.</li>
             <li data-tag="release" data-t="1" data-join=" ">Owned the weekly release train and the on&#8209;call rotation, driving the app to <strong>version 547</strong><c data-t="3"> against a pipeline that built every pull request and posted an installable build straight into the team&rsquo;s Slack channel on merge</c>.</li>
           </ul>
@@ -903,39 +899,58 @@ mark{background:var(--signal-wash);color:var(--ink);border-radius:1px;}
   <section>
     <div class="sec-head"><h2>Capabilities</h2></div>
     <dl class="caps">
-      <div class="cap">
+      <c data-only="short one">
+        <div class="cap">
+          <dt>Languages</dt>
+          <dd><b>Kotlin</b><i>&middot;</i><b>Swift</b><i>&middot;</i><b>TypeScript</b></dd>
+        </div>
+        <div class="cap">
+          <dt>Mobile</dt>
+          <dd>Jetpack Compose<i>&middot;</i>UIKit / SwiftUI<i>&middot;</i>React Native<i>&middot;</i>Kotlin / Compose Multiplatform</dd>
+        </div>
+        <div class="cap">
+          <dt>Platform</dt>
+          <dd>Multi&#8209;module Gradle<i>&middot;</i>React Native in native apps<i>&middot;</i>Ktor<i>&middot;</i>SPM / CocoaPods</dd>
+        </div>
+        <div class="cap">
+          <dt>Reliability &amp; Delivery</dt>
+          <dd>Startup / ANR profiling<i>&middot;</i>Sentry / Crashlytics<i>&middot;</i>Fastlane<i>&middot;</i>GitHub Actions<i>&middot;</i>OTA guardrails</dd>
+        </div>
+      </c>
+
+      <div class="cap" data-t="3">
         <dt>Languages</dt>
         <dd><b>Kotlin</b><i>&middot;</i><b>Swift</b><i>&middot;</i><b>TypeScript</b> &mdash; production<i>&middot;</i>Java<i>&middot;</i>Objective-C<i>&middot;</i>Groovy / Gradle&nbsp;KTS &mdash; read, maintain, migrate off</dd>
       </div>
-      <div class="cap">
+      <div class="cap" data-t="3">
         <dt>Android</dt>
-        <dd>Jetpack Compose<i>&middot;</i>Coroutines &amp; Flow<i>&middot;</i>Hilt<i>&middot;</i>Dagger multibinding<i>&middot;</i>Koin<i>&middot;</i>Room<i>&middot;</i>DataStore<i>&middot;</i>WorkManager<i>&middot;</i>Paging&nbsp;3<i>&middot;</i>Navigation<i>&middot;</i>App&nbsp;Startup<i>&middot;</i>Data Binding<i>&middot;</i>Media3 &amp; ExoPlayer<i>&middot;</i>CameraX<i>&middot;</i>Coil / Glide<i>&middot;</i>R8<i>&middot;</i>Baseline&nbsp;Profiles<i>&middot;</i>NDK &amp; 16&nbsp;KB page alignment</dd>
+        <dd>Jetpack Compose<i>&middot;</i>Coroutines &amp; Flow<i>&middot;</i>Hilt<c data-t="1"><i>&middot;</i>Dagger multibinding<i>&middot;</i>Koin</c><i>&middot;</i>Room<i>&middot;</i>DataStore<i>&middot;</i>WorkManager<c data-t="1"><i>&middot;</i>Paging&nbsp;3<i>&middot;</i>Navigation<i>&middot;</i>App&nbsp;Startup<i>&middot;</i>Data Binding<i>&middot;</i>Media3 &amp; ExoPlayer<i>&middot;</i>CameraX<i>&middot;</i>Coil / Glide<i>&middot;</i>R8<i>&middot;</i>Baseline&nbsp;Profiles<i>&middot;</i>NDK &amp; 16&nbsp;KB page alignment</c></dd>
       </div>
-      <div class="cap" data-t="1">
+      <div class="cap" data-t="3">
         <dt>iOS</dt>
-        <dd>Swift<i>&middot;</i>UIKit<i>&middot;</i>SwiftUI<i>&middot;</i>Combine<i>&middot;</i>Swift concurrency &amp; actors<i>&middot;</i>CocoaPods<i>&middot;</i>Swift Package Manager<i>&middot;</i>XCFrameworks<i>&middot;</i>xcodeproj surgery<i>&middot;</i>App&nbsp;Store Connect &amp; TestFlight<i>&middot;</i>App Tracking Transparency</dd>
+        <dd>Swift<i>&middot;</i>UIKit<i>&middot;</i>SwiftUI<i>&middot;</i>Combine<i>&middot;</i>Swift concurrency &amp; actors<i>&middot;</i>CocoaPods<i>&middot;</i>Swift Package Manager<i>&middot;</i>XCFrameworks<i>&middot;</i>Xcode project configuration<i>&middot;</i>App&nbsp;Store Connect &amp; TestFlight<i>&middot;</i>App Tracking Transparency</dd>
       </div>
-      <div class="cap">
+      <div class="cap" data-t="3">
         <dt>Kotlin Multiplatform</dt>
-        <dd>commonMain / androidMain / iosMain<i>&middot;</i><code>expect</code> &amp; <code>actual</code><i>&middot;</i><b>Compose Multiplatform</b><i>&middot;</i>Ktor client<i>&middot;</i>kotlinx&#8209;serialization<i>&middot;</i>BuildKonfig<i>&middot;</i>SPM &amp; CocoaPods framework bridging<i>&middot;</i>native SDK wrappers on both platforms</dd>
+        <dd><c data-t="1">commonMain / androidMain / iosMain<i>&middot;</i><code>expect</code> &amp; <code>actual</code><i>&middot;</i></c><b>Compose Multiplatform</b><i>&middot;</i>Ktor client<i>&middot;</i>kotlinx&#8209;serialization<c data-t="1"><i>&middot;</i>BuildKonfig<i>&middot;</i>SPM &amp; CocoaPods framework bridging<i>&middot;</i>native SDK wrappers on both platforms</c></dd>
       </div>
-      <div class="cap">
+      <div class="cap" data-t="3">
         <dt>React Native</dt>
         <dd>Native modules &amp; view managers<i>&middot;</i>RN&#8209;in&#8209;native hosting<i>&middot;</i>Hermes<i>&middot;</i>Metro<i>&middot;</i>Fabric &amp; TurboModules<i>&middot;</i>Reanimated<i>&middot;</i>Zustand<i>&middot;</i>TanStack Query<i>&middot;</i>CodePush / OTA delivery<i>&middot;</i>patch-package</dd>
       </div>
-      <div class="cap" data-t="1">
+      <div class="cap" data-t="3">
         <dt>Architecture</dt>
         <dd>Multi&#8209;module Gradle<i>&middot;</i>Clean architecture &amp; ports/adapters<i>&middot;</i>MVVM / MVI<i>&middot;</i>Dependency injection<i>&middot;</i>Domain layers with zero framework coupling<i>&middot;</i>Server&#8209;driven UI &amp; forms<i>&middot;</i>Feature flags &amp; A/B experimentation<i>&middot;</i>Hybrid native&#8209;to&#8209;RN navigation<i>&middot;</i>Monorepo migration</dd>
       </div>
-      <div class="cap" data-t="1">
+      <div class="cap" data-t="3">
         <dt><c data-only="full">Performance &amp; Observability</c><c data-only="short">Observability</c></dt>
         <dd>Firebase Performance custom traces<i>&middot;</i>react-native-performance<i>&middot;</i>New&nbsp;Relic<i>&middot;</i>Sentry<i>&middot;</i>Crashlytics<i>&middot;</i>LeakCanary<i>&middot;</i>StrictMode<i>&middot;</i>Perfetto &amp; systrace<i>&middot;</i>Instruments<i>&middot;</i>cold&#8209;start, jank, ANR and memory profiling<i>&middot;</i>CDN image pipelines &amp; cache tuning</dd>
       </div>
-      <div class="cap" data-t="1">
+      <div class="cap" data-t="3">
         <dt>Build &amp; Release</dt>
         <dd>Gradle convention plugins &amp; version catalogues<i>&middot;</i>buildSrc<i>&middot;</i>Product flavours &amp; build types<i>&middot;</i>kapt&nbsp;&rarr;&nbsp;KSP<i>&middot;</i>CocoaPods post&#8209;integrate hooks<i>&middot;</i>Fastlane<i>&middot;</i>TeamCity &amp; GitHub Actions<i>&middot;</i>Play&nbsp;Console &amp; TestFlight<i>&middot;</i>Release trains &amp; hotfixes<i>&middot;</i>OTA rollout guardrails</dd>
       </div>
-      <div class="cap" data-t="1">
+      <div class="cap" data-t="3">
         <dt><c data-only="full">Vendor SDKs &mdash; integrated, abstracted, removed</c><c data-only="short">Vendor SDKs</c></dt>
         <dd>AppsFlyer<i>&middot;</i>Adjust<i>&middot;</i>CleverTap<i>&middot;</i>MoEngage<i>&middot;</i>WebEngage<i>&middot;</i>Firebase<i>&middot;</i>Segment<i>&middot;</i>Mixpanel<i>&middot;</i>Amplitude<i>&middot;</i>Juspay HyperSDK<i>&middot;</i>Razorpay<i>&middot;</i>Braintree<i>&middot;</i>PayPal<i>&middot;</i>Klarna<i>&middot;</i>Amazon&nbsp;Pay<i>&middot;</i>Simpl<i>&middot;</i>Truecaller<i>&middot;</i>Sendbird<i>&middot;</i>Google&nbsp;Maps<i>&middot;</i>Facebook</dd>
       </div>
@@ -943,6 +958,14 @@ mark{background:var(--signal-wash);color:var(--ink);border-radius:1px;}
   </section>
 
   <footer class="colophon">
+    <div class="projects">
+      <h3>Projects</h3>
+      <ul>
+        <li><span class="t">DOOM</span><c>The 1993 original ported to <b>Kotlin Multiplatform</b> &mdash; one Compose codebase running on Android, iOS, desktop JVM and the web through WebAssembly</c><span class="s"><a href="https://github.com/kunal26das/doom">github.com/kunal26das/doom</a></span></li>
+        <li data-t="1"><span class="t">Multidex</span><c data-t="1">Offline&#8209;first Pok&eacute;dex &mdash; <b>Kotlin Multiplatform</b> and Compose, one codebase shipping to Android, iOS and desktop</c><span class="s"><a href="https://play.google.com/store/apps/details?id=io.github.kunal26das.multidex">Google Play</a></span></li>
+        <li data-t="3"><span class="t">Yify</span><c data-t="3">Movie catalogue with search, filters and in&#8209;app trailers &mdash; <b>React&nbsp;Native</b> on Expo, layered the same way as my production work</c><span class="s"><a href="https://play.google.com/store/apps/details?id=io.github.kunal26das.yify">Google Play</a> · <a href="https://kunal26das.github.io/yify/">Web</a> · <a href="https://github.com/kunal26das/yify">Source</a></span></li>
+      </ul>
+    </div>
     <div>
       <h3>Education</h3>
       <ul>
@@ -959,7 +982,7 @@ mark{background:var(--signal-wash);color:var(--ink);border-radius:1px;}
         <li><span class="t">SOLID Principles</span><span class="s">Udemy</span></li>
       </ul>
     </div>
-    <div>
+    <div data-t="1">
       <h3>Shipped</h3>
       <ul>
         <li data-org="licious"><span class="t">Licious</span><span class="s"><a href="https://play.google.com/store/apps/details?id=com.licious">Google Play</a> · <a href="https://apps.apple.com/in/app/licious-chicken-fish-meat/id1052440342">App Store</a></span></li>
@@ -967,14 +990,6 @@ mark{background:var(--signal-wash);color:var(--ink);border-radius:1px;}
         <li data-org="powerplay"><span class="t">Powerplay</span><span class="s"><a href="https://play.google.com/store/apps/details?id=in.powerplay.android.fieldapp">Google Play</a></span></li>
         <li data-org="alle"><span class="t">Alle — AI Fashion Stylist</span><span class="s">Android · discontinued</span></li>
         <li data-org="koo"><span class="t">Koo</span><span class="s">Android · discontinued</span></li>
-      </ul>
-    </div>
-    <div>
-      <h3 data-t="1">Projects</h3>
-      <ul data-t="1">
-        <li data-t="1"><span class="t">DOOM</span><c data-t="3">The 1993 original ported to <b>Kotlin Multiplatform</b> &mdash; one Compose codebase running on Android, iOS, desktop JVM and the web through WebAssembly</c><span class="s"><a href="https://github.com/kunal26das/doom">github.com/kunal26das/doom</a></span></li>
-        <li data-t="1"><span class="t">Multidex</span><c data-t="3">Offline&#8209;first Pok&eacute;dex &mdash; <b>Kotlin Multiplatform</b> and Compose, one codebase shipping to Android, iOS and desktop</c><span class="s"><a href="https://play.google.com/store/apps/details?id=io.github.kunal26das.multidex">Google Play</a></span></li>
-        <li data-t="1"><span class="t">Yify</span><c data-t="3">Movie catalogue with search, filters and in&#8209;app trailers &mdash; <b>React&nbsp;Native</b> on Expo, layered the same way as my production work</c><span class="s"><a href="https://play.google.com/store/apps/details?id=io.github.kunal26das.yify">Google Play</a> · <a href="https://kunal26das.github.io/yify/">Web</a> · <a href="https://github.com/kunal26das/yify">Source</a></span></li>
       </ul>
     </div>
   </footer>

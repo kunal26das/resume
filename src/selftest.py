@@ -152,6 +152,49 @@ def check_refusals():
     return failures
 
 
+def check_backup_rotation():
+    import os
+    import pathlib
+    import shutil
+    import subprocess
+    import tempfile
+    import build
+
+    # Run the real shell workflow against disposable archives; only the expensive
+    # resume build is stubbed. Spaces and newlines must remain part of each path.
+    with tempfile.TemporaryDirectory(prefix="resume snapshot ") as temp:
+        root = pathlib.Path(temp)
+        source = root / "src"
+        source.mkdir()
+        shutil.copyfile(build.SRC / "snapshot.sh", source / "snapshot.sh")
+        (source / "archive.py").write_text(
+            'from pathlib import Path\n'
+            'Path("archive").mkdir(exist_ok=True)\n'
+            'Path("archive/manifest.json").write_text("[]\\n")\n')
+        backup = root / "Mobile Documents" / "backup\nfolder"
+        backup.mkdir(parents=True)
+        old = []
+        for n in range(6):
+            path = backup / f"resume-archive-2000-01-{n + 1:02}.tar.gz"
+            path.write_text(str(n))
+            os.utime(path, (n + 1, n + 1))
+            old.append(path)
+        sentinel = backup / "keep me.txt"
+        sentinel.write_text("unrelated file")
+        run = subprocess.run(["sh", str(source / "snapshot.sh"), "regression test"],
+                             cwd=root, env={**os.environ, "RESUME_BACKUP": str(backup)},
+                             capture_output=True, text=True)
+        ok = (run.returncode == 0 and
+              len(list(backup.glob("resume-archive-*.tar.gz"))) == 5 and
+              not any(path.exists() for path in old[:2]) and
+              all(path.exists() for path in old[2:]) and
+              sentinel.read_text() == "unrelated file")
+        print(f"{'PASS' if ok else 'FAIL'}  snapshot: keeps five newest backups with whitespace in paths")
+        if not ok:
+            print(run.stdout, run.stderr)
+        return 0 if ok else 1
+
+
 def main():
     failures = 0
     for name, markup, keep, variant, join, want in CASES:
@@ -171,7 +214,8 @@ def main():
     failures += check_refusals()
     struct_failures, struct_total = structural_refusals()
     failures += struct_failures
-    total = len(CASES) + 1 + len(REFUSALS) + struct_total
+    failures += check_backup_rotation()
+    total = len(CASES) + 2 + len(REFUSALS) + struct_total
     print(f"\n{total - failures}/{total} passed")
     return 1 if failures else 0
 

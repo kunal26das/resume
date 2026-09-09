@@ -25,6 +25,7 @@ import subprocess
 import tempfile
 import time
 import zipfile
+import xml.etree.ElementTree as ET
 from datetime import date
 from html import unescape
 from html.parser import HTMLParser
@@ -67,14 +68,14 @@ FOCUS_LENGTH = "short"
 
 SHOW_ALL = "hide=none&contact=show"
 PDF_JOBS = [
-    (f"{STEM}.pdf",            "", 7),
+    (f"{STEM}.pdf",            "len=full", 7),
     (f"{STEM}-short.pdf",      "len=short", 2),
     (f"{STEM}-ats.pdf",        "len=short&lay=plain", 2),
     (f"{STEM}-one.pdf",        "len=one", 1),
     (f"{STEM}-platform.pdf",   "len=short&lead=platform", 2),
     (f"{STEM}-product.pdf",    "len=short&lead=product", 2),
     (f"{STEM}-android.pdf",    "len=short&lead=android", 2),
-    (f"{STEM}-dark.pdf",       "theme=dark", 7),
+    (f"{STEM}-dark.pdf",       "len=full&theme=dark", 7),
     (f"{STEM}-short-dark.pdf", "len=short&theme=dark", 2),
 ]
 
@@ -529,7 +530,7 @@ def emit_live(source_body, title_src):
         body += f"\n<script>\n{script(name)}</script>"
     title = ascii_only(title_src)
     text = page(body, title, url=SITE_URL, canonical=SITE_URL,
-                attrs=' data-len="full" data-layout="datasheet" data-lead=""')
+                attrs=' data-len="short" data-layout="datasheet" data-lead=""')
     (ROOT / "index.html").write_text(text, encoding="utf-8")
     print(f"{'index.html':<30}{len(text)/1024:>6.0f} KB  "
           f"({masked} contact entries masked)")
@@ -673,7 +674,7 @@ PROBE_VIEWS = [
 ]
 PROBE_JS = """
 (function () {
- function run() {
+ async function run() {
   var views = __VIEWS__;
   var out = [];
   try {
@@ -695,10 +696,17 @@ PROBE_JS = """
         text: window.__formats.text(doc),
         md: window.__formats.markdown(doc),
         json: window.__formats.json(doc, "PROBE"),
+        links: doc.colophon.reduce(function (all, col) {
+          return all.concat(col.items.reduce(function (links, item) {
+            return links.concat(item.links);
+          }, []));
+        }, []),
         docx: window.btoa(bin),
         page: views[i].page ? window.__versions.page() : ""
       });
     }
+    var checks = await window.__browserSelftest();
+    out.push({label: "browser/selftest", checks: checks.checks, failures: checks.failures});
   } catch (e) {
     out = {error: String(e && e.stack || e)};
   }
@@ -795,10 +803,16 @@ def check_formats(views, source_numbers, details, shapes):
     if isinstance(views, dict):
         raise SystemExit(f"the format generators threw: {views.get('error')}")
     for view in views:
+        if view["label"] == "browser/selftest":
+            if view["failures"]:
+                raise SystemExit(f"browser self-tests failed: {view['failures']}")
+            print(f"{'browser/selftest':<30}{view['checks']} checks passed")
+            continue
         where = f"formats/{view['label']}"
         check_parity(where, view["shape"], shapes[view["label"]])
         for kind in ("text", "md"):
-            invented = numbers_in(view[kind]) - source_numbers
+            prose = re.sub(r'https?://[^\s)<>]+', '', view[kind])
+            invented = numbers_in(prose) - source_numbers
             if invented:
                 raise SystemExit(f"{where}: {kind} states figure(s) {sorted(invented)} "
                                  "that are not in src/resume.html")
@@ -815,10 +829,16 @@ def check_formats(views, source_numbers, details, shapes):
         blob = base64.b64decode(view["docx"])
         with zipfile.ZipFile(io.BytesIO(blob)) as z:
             missing = {"[Content_Types].xml", "_rels/.rels", "word/styles.xml",
-                       "word/document.xml"} - set(z.namelist())
+                       "word/document.xml", "word/_rels/document.xml.rels"} - set(z.namelist())
             if missing:
                 raise SystemExit(f"{where}: the Word file is missing {sorted(missing)}")
             document = z.read("word/document.xml").decode("utf-8")
+            relationships = ET.fromstring(z.read("word/_rels/document.xml.rels"))
+            links = {el.get("Target") for el in relationships
+                     if el.get("TargetMode") == "External"}
+        for link in view["links"]:
+            if link not in view["text"] or link not in view["md"] or link not in links:
+                raise SystemExit(f"{where}: an export dropped portfolio URL {link!r}")
         for detail in details:
             for kind, body in (("text", view["text"]), ("md", view["md"]),
                                ("json", view["json"]), ("docx", document)):
@@ -838,7 +858,7 @@ def check_formats(views, source_numbers, details, shapes):
 def probe_script():
     views = [{"label": label, "cfg": cfg, "page": 1 if page else 0}
              for label, cfg, _, page in PROBE_VIEWS]
-    return PROBE_JS.replace("__VIEWS__", json.dumps(views))
+    return script("browser-selftest.js") + "\n" + PROBE_JS.replace("__VIEWS__", json.dumps(views))
 
 
 def expected_shapes(source_body):

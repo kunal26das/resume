@@ -15,7 +15,15 @@ if [ -d "$(dirname "$BACKUP")" ]; then
   STAMP=$(date +%Y-%m-%d)
   tar -czf "$BACKUP/resume-archive-$STAMP.tar.gz" archive
   cp archive/manifest.json "$BACKUP/manifest.json"
-  ls -1t "$BACKUP"/resume-archive-*.tar.gz | tail -n +6 | xargs -r rm --
+  python3 - "$BACKUP" <<'PY'
+import pathlib
+import sys
+
+backups = sorted(pathlib.Path(sys.argv[1]).glob("resume-archive-*.tar.gz"),
+                 key=lambda path: (path.stat().st_mtime_ns, path.name), reverse=True)
+for old in backups[5:]:
+    old.unlink()
+PY
   echo
   echo "backed up to $BACKUP"
   ls -1t "$BACKUP"/resume-archive-*.tar.gz | head -5

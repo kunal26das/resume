@@ -53,15 +53,16 @@
 
   var MASTER = null, MOUNT = null, PANEL = null, JUMPS = [];
   var ORGS = [], TOPICS = [], STEM = "resume";
-  var cfg = null, stats = { shown: 0, total: 0 }, timer = null, ticking = false;
+  var cfg = null, sourceDefaults = null;
+  var stats = { shown: 0, total: 0 }, timer = null, ticking = false;
 
   function defaults() {
-    var el = document.documentElement, off = [];
+    var off = [];
     ORGS.forEach(function (o) { if (o.off) off.push(o.slug); });
     return {
-      len: el.getAttribute("data-len") || "full",
-      layout: el.getAttribute("data-layout") || "datasheet",
-      lead: el.getAttribute("data-lead") || "",
+      len: sourceDefaults.len,
+      layout: sourceDefaults.layout,
+      lead: sourceDefaults.lead,
       theme: "auto", contact: "hide", hide: off,
       only: [], q: ""
     };
@@ -425,8 +426,9 @@
     PANEL = document.createElement("div");
     PANEL.className = "v-ui";
     PANEL.innerHTML =
-      '<button type="button" class="v-toggle" data-group="panel">Filter</button>' +
-      '<aside class="v-side" aria-label="Versions">' +
+      '<button type="button" class="v-toggle" data-group="panel"' +
+      ' aria-controls="resume-versions-panel" aria-expanded="false">Filter</button>' +
+      '<aside id="resume-versions-panel" class="v-side" aria-label="Versions">' +
       '<div class="v-head"><span class="v-title">Versions</span>' +
       '<button type="button" class="v-btn v-hide" data-group="panel">Hide</button>' +
       '<span class="v-now"></span></div>' +
@@ -596,7 +598,7 @@
       return;
     }
     apply(function () {
-      if (g === "reset") cfg = defaults();
+      if (g === "reset") { cancelPendingSearch(); cfg = defaults(); }
       else if (g === "org") toggle(cfg.hide, v);
       else if (g === "topic") toggle(cfg.only, v);
       else if (g === "all-topics") cfg.only = [];
@@ -605,11 +607,17 @@
     }, g === "reset");
   }
 
+  function cancelPendingSearch() {
+    clearTimeout(timer);
+    timer = null;
+  }
+
   function onInput(e) {
     if (e.target.getAttribute("data-field") !== "q") return;
-    clearTimeout(timer);
+    cancelPendingSearch();
     var val = e.target.value;
     timer = setTimeout(function () {
+      timer = null;
       apply(function () { cfg.q = val.slice(0, 80); });
     }, 200);
   }
@@ -642,14 +650,28 @@
     });
   }
 
-  function setPanel(open) {
+  function setPanel(open, manageFocus) {
+    var side = PANEL.querySelector(".v-side"), toggle = PANEL.querySelector(".v-toggle");
+    var wasInside = side.contains(document.activeElement);
     document.documentElement.setAttribute("data-panel", open ? "open" : "closed");
+    side.inert = !open;
+    toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    if (manageFocus !== false) {
+      if (open) side.querySelector(".v-hide").focus({ preventScroll: true });
+      else if (wasInside) toggle.focus({ preventScroll: true });
+    }
     try { localStorage.setItem("resume-panel", open ? "open" : "closed"); } catch (e) {}
   }
 
   function init() {
     var sheet = document.querySelector(".sheet");
     if (!sheet) return;
+    var el = document.documentElement;
+    sourceDefaults = {
+      len: el.getAttribute("data-len") || "full",
+      layout: el.getAttribute("data-layout") || "datasheet",
+      lead: el.getAttribute("data-lead") || ""
+    };
     MASTER = sheet.cloneNode(true);
     discover();
     cfg = read();
@@ -660,7 +682,10 @@
           document.documentElement.getAttribute("data-panel") === "open") setPanel(false);
     });
     document.addEventListener("input", onInput);
-    window.addEventListener("popstate", function () { cfg = read(); render(); update(true); });
+    window.addEventListener("popstate", function () {
+      cancelPendingSearch();
+      cfg = read(); render(); update(true);
+    });
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
     window.addEventListener("beforeprint", function () { reveal(document); });
@@ -670,7 +695,7 @@
     document.documentElement.setAttribute("data-versions", "on");
     var saved = null;
     try { saved = localStorage.getItem("resume-panel"); } catch (e) {}
-    setPanel(saved ? saved === "open" : window.innerWidth >= 1180);
+    setPanel(saved ? saved === "open" : window.innerWidth >= 1180, false);
     render();
     update(true);
   }
@@ -681,6 +706,7 @@
 
   window.__versions = {
     apply: function (c) {
+      cancelPendingSearch();
       cfg = Object.assign(defaults(), c);
       render();
       update(true);

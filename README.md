@@ -11,10 +11,15 @@ behind any host, with nothing to break when a CDN changes.
 ## The page filters itself
 
 `/` ships the whole annotated document — every bullet carrying the tags that decide when it
-survives — plus a 53 KB engine that does in the browser exactly what the build used to do on
+survives — plus a 59 KB engine that does in the browser exactly what the build used to do on
 my machine: drop the subtrees a shorter version does not admit, join the bullets that merge
-into their neighbour, re-count the sentences that count themselves. 324 KB, no network calls,
+into their neighbour, re-count the sentences that count themselves. About 340 KB, no network calls,
 no framework.
+
+The opening view is the two-page resume. **Full** expands it into the detailed career
+record. The datasheet layout leads with platform ownership, three concrete proof points,
+and a concise skills summary; the shorter copies also describe the DOOM port rather than
+reducing it to a project name and link.
 
 The controls live in a panel down the left edge, behind a chip in the corner on a narrow
 screen. It sits outside the resume — appended to the page, never mounted inside the document
@@ -108,7 +113,10 @@ python3 src/build.py     # about 25 seconds
 
 # any one-off copy, into gitignored out/ — the same renditions without a browser
 python3 src/render.py --len short --lead android --hide wish --theme dark --pdf
-python3 src/selftest.py  # 31 checks, instant
+python3 src/selftest.py  # 32 checks, including backup rotation
+
+# optional focused export regression checks (requires Node.js)
+node src/formats-selftest.js
 ```
 
 No dependencies beyond Python 3, and a local Chrome or Chromium — without one the build prints
@@ -126,7 +134,7 @@ preserving in git when `/archive/` is the readable version of it — so every ch
 squashed into the single root commit and force-pushed over the remote. GitHub Pages serves
 the root as-is: no CI, no build step, no second branch.
 
-331 KB of source, 147 KB of it woff2, produces one 324 KB page, and that page is the site.
+The fonts account for 147 KB; the self-contained page is about 340 KB, and that page is the site.
 
 ## How the versions stay honest
 
@@ -143,8 +151,10 @@ refuses to let a sentence that counts the document, "the eight I would lead with
 when filtering changes the count. The renditions are made in the browser now, so the build
 drives them there: a headless run generates all four downloads across five different views,
 then checks the text and Markdown for invented figures, the JSON for a section gone silently
-empty, and the Word file for its five parts. `src/selftest.py` breaks each of those rules on
-purpose and checks that the build says no.
+empty, and the Word file for its five parts. Portfolio and app links must survive in text,
+Markdown and Word, with clickable links in the latter two. Ten browser checks cover search,
+Reset, shared layouts, topic highlights, one-page role coverage and keyboard focus when opening or closing the panel.
+`src/selftest.py` exercises the content rules and checks backup rotation in folders with spaces.
 
 Every figure on the resume is measured from the underlying repository's git history. Nothing
 is estimated, rounded up, or extrapolated.
@@ -178,6 +188,8 @@ src/versions.js        the live filter engine
 src/formats.js         text, Markdown, JSON and Word, written in the browser
 src/build.py           the build
 src/selftest.py        tests for the content filter and the content rules
+src/browser-selftest.js browser regression checks, run by the build
+src/formats-selftest.js optional focused export checks, run with Node.js
 src/render.py          renders one arbitrary version into out/
 src/archive.py         snapshots a build into archive/
 src/snapshot.sh        archive.py + the commands to publish the resume

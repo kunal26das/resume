@@ -13,13 +13,15 @@
   };
   var COUNTRY = { India: "IN" };
 
-  function plain(text) {
+  function normalised(text) {
     var s = text === null || text === undefined ? "" : String(text), i;
     for (i = 0; i < NORMALISE.length; i++) {
       s = s.split(NORMALISE[i][0]).join(NORMALISE[i][1]);
     }
-    return s.replace(/\s+/g, " ").trim();
+    return s.replace(/\s+/g, " ");
   }
+
+  function plain(text) { return normalised(text).trim(); }
 
   function nonEmpty(s) { return !!s; }
 
@@ -72,6 +74,57 @@
     return list(el.querySelectorAll("a")).map(function (a) {
       return a.getAttribute("href");
     });
+  }
+
+  function inlineRuns(el, omit) {
+    var runs = [];
+    function visit(node, href) {
+      if (node.nodeType === 1) {
+        if (tagged(node, omit || [])) return;
+        if (node.tagName === "A") href = node.getAttribute("href") || href;
+        list(node.childNodes).forEach(function (child) { visit(child, href); });
+      } else if (node.nodeType === 3) {
+        var previous = runs[runs.length - 1];
+        if (previous && previous.href === href) previous.text += node.textContent;
+        else runs.push({ text: node.textContent, href: href });
+      }
+    }
+    if (el) list(el.childNodes).forEach(function (node) { visit(node, null); });
+    var previous = "";
+    runs.forEach(function (run) {
+      run.text = normalised(run.text);
+      if (!previous || previous.slice(-1) === " ") run.text = run.text.replace(/^ +/, "");
+      if (run.text) previous = run.text;
+    });
+    runs = runs.filter(function (run) { return !!run.text; });
+    if (runs.length) runs[runs.length - 1].text = runs[runs.length - 1].text.replace(/ +$/, "");
+    return runs.filter(function (run) { return !!run.text; });
+  }
+
+  function colophonRuns(item, separator) {
+    var out = [];
+    ["title", "text", "sub"].forEach(function (field) {
+      var runs = item.runs ? item.runs[field] : [{ text: item[field], href: null }];
+      if (!item[field]) return;
+      if (out.length) out.push({ text: separator, href: null });
+      push(out, runs);
+    });
+    return out;
+  }
+
+  function textRun(run) {
+    if (!run.href) return run.text;
+    var label = run.text.trim();
+    var text = label === run.href || label === run.href.replace(/^https?:\/\//, "") ?
+      run.href : label + ": " + run.href;
+    return run.text.match(/^ */)[0] + text + run.text.match(/ *$/)[0];
+  }
+
+  function markdownText(text) { return text.replace(/[\\[\]`*_<>]/g, "\\$&"); }
+
+  function markdownRun(run) {
+    var label = markdownText(run.text);
+    return run.href ? "[" + label + "](" + run.href.replace(/[\s()<>]/g, encodeURIComponent) + ")" : label;
   }
 
   function capabilityValues(dd) {
@@ -163,7 +216,12 @@
       title: textOf(li.querySelector("span.t")),
       text: textWithout(li, ["t", "s"]),
       sub: textOf(li.querySelector("span.s")),
-      links: hrefs(li)
+      links: hrefs(li),
+      runs: {
+        title: inlineRuns(li.querySelector("span.t")),
+        text: inlineRuns(li, ["t", "s"]),
+        sub: inlineRuns(li.querySelector("span.s"))
+      }
     };
   }
 
@@ -244,6 +302,13 @@
   function splitChunks(text) {
     var out = [], i = 0, n = text.length, j, p;
     while (i < n) {
+      if (/^https?:\/\//.test(text.slice(i))) {
+        j = i;
+        while (j < n && !isSpace(text.charAt(j))) j++;
+        out.push(text.slice(i, j));
+        i = j;
+        continue;
+      }
       if (isSpace(text.charAt(i))) {
         j = i;
         while (j < n && isSpace(text.charAt(j))) j++;
@@ -298,7 +363,9 @@
         line.push(chunks.pop());
       }
       if (chunks.length && chunks[chunks.length - 1].length > room) {
-        breakLongWord(chunks, line, used, room);
+        if (/^https?:\/\//.test(chunks[chunks.length - 1])) {
+          if (!used) line.push(chunks.pop());
+        } else breakLongWord(chunks, line, used, room);
         used = 0;
         for (i = 0; i < line.length; i++) used += line[i].length;
       }
@@ -372,8 +439,7 @@
     doc.colophon.forEach(function (col) {
       push(out, ["", rule, col.heading.toUpperCase(), rule]);
       col.items.forEach(function (item) {
-        var line = "  " + [item.title, item.text, item.sub]
-          .filter(nonEmpty).join(" - ");
+        var line = "  " + colophonRuns(item, " - ").map(textRun).join("");
         push(out, wrap(line, w, "    "));
       });
     });
@@ -430,7 +496,11 @@
     doc.colophon.forEach(function (col) {
       push(out, ["## " + col.heading, ""]);
       col.items.forEach(function (item) {
-        var bits = [item.title ? "**" + item.title + "**" : "", item.text, item.sub];
+        var bits = ["title", "text", "sub"].map(function (field) {
+          var runs = item.runs ? item.runs[field] : [{ text: item[field], href: null }];
+          var text = runs.map(markdownRun).join("");
+          return field === "title" && text ? "**" + text + "**" : text;
+        });
         out.push("- " + bits.filter(nonEmpty).join(" " + EMDASH + " "));
       });
       out.push("");
@@ -605,12 +675,20 @@
     "</Relationships>"
   ].join("\n");
 
-  var DOC_RELS = [
-    '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>',
-    '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">',
-    '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/>',
-    "</Relationships>"
-  ].join("\n");
+  function documentRels(links) {
+    var parts = [
+      '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>',
+      '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">',
+      '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/>'
+    ];
+    links.forEach(function (href, i) {
+      parts.push('<Relationship Id="rId' + (i + 2) +
+        '" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink"' +
+        ' Target="' + esc(href).replace(/"/g, "&quot;") + '" TargetMode="External"/>');
+    });
+    parts.push("</Relationships>");
+    return parts.join("\n");
+  }
 
   function style(id, name, size, opt) {
     var o = opt || {};
@@ -646,17 +724,32 @@
     return text.split("&").join("&amp;").split("<").join("&lt;").split(">").join("&gt;");
   }
 
-  function para(text, name, bullet) {
-    var ind = bullet ? '<w:ind w:left="360" w:hanging="180"/>' : "";
-    var body = bullet ? BULLET + EMSPACE + text : text;
-    return '<w:p><w:pPr><w:pStyle w:val="' + (name || "Body") + '"/>' + ind + "</w:pPr>" +
-      '<w:r><w:t xml:space="preserve">' + esc(body) + "</w:t></w:r></w:p>";
+  function wordRun(run, links) {
+    var properties = run.href ? '<w:rPr><w:color w:val="0563C1"/><w:u w:val="single"/></w:rPr>' : "";
+    var body = '<w:r>' + properties + '<w:t xml:space="preserve">' + esc(run.text) + '</w:t></w:r>';
+    if (!run.href) return body;
+    var at = links.indexOf(run.href);
+    if (at < 0) { at = links.length; links.push(run.href); }
+    return '<w:hyperlink r:id="rId' + (at + 2) + '" w:history="1">' + body + '</w:hyperlink>';
   }
 
-  function documentXml(doc) {
+  function para(text, name, bullet, links) {
+    var ind = bullet ? '<w:ind w:left="360" w:hanging="180"/>' : "";
+    var runs = typeof text === "string" ? [{ text: text, href: null }] : text.slice();
+    if (bullet) runs.unshift({ text: BULLET + EMSPACE, href: null });
+    var body = runs.map(function (run) { return wordRun(run, links); }).join("");
+    return '<w:p><w:pPr><w:pStyle w:val="' + (name || "Body") + '"/>' + ind + "</w:pPr>" +
+      body + "</w:p>";
+  }
+
+  function documentXml(doc, links) {
+    var contact = [];
+    doc.contact.forEach(function (item, i) {
+      if (i) contact.push({ text: "  |  ", href: null });
+      contact.push(item);
+    });
     var parts = [para(doc.name, "Title"), para(doc.title, "Subtitle"),
-                 para(doc.contact.map(function (c) { return c.text; }).join("  |  "),
-                      "Contact")];
+                 para(contact, "Contact", false, links)];
 
     parts.push(para("Profile", "Heading1"));
     push(parts, doc.summary.map(function (p) { return para(p, "Body"); }));
@@ -697,13 +790,13 @@
     doc.colophon.forEach(function (col) {
       parts.push(para(col.heading, "Heading1"));
       col.items.forEach(function (item) {
-        parts.push(para([item.title, item.text, item.sub]
-          .filter(nonEmpty).join(" " + EMDASH + " "), "Body", true));
+        parts.push(para(colophonRuns(item, " " + EMDASH + " "), "Body", true, links));
       });
     });
 
     return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n' +
-      '<w:document xmlns:w="' + W + '"><w:body>' + parts.join("") +
+      '<w:document xmlns:w="' + W +
+      '" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><w:body>' + parts.join("") +
       '<w:sectPr><w:pgSz w:w="11906" w:h="16838"/>' +
       '<w:pgMar w:top="720" w:right="720" w:bottom="720" w:left="720"/>' +
       "</w:sectPr></w:body></w:document>";
@@ -808,12 +901,13 @@
   }
 
   function toDocx(doc) {
+    var links = [], document = documentXml(doc, links);
     return zip([
       ["[Content_Types].xml", CONTENT_TYPES],
       ["_rels/.rels", RELS],
-      ["word/_rels/document.xml.rels", DOC_RELS],
+      ["word/_rels/document.xml.rels", documentRels(links)],
       ["word/styles.xml", STYLES],
-      ["word/document.xml", documentXml(doc)]
+      ["word/document.xml", document]
     ]);
   }
 

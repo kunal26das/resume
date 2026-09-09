@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-len="full" data-layout="datasheet" data-lead="">
+<html lang="en" data-len="short" data-layout="datasheet" data-lead="">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -598,6 +598,303 @@ mark{background:var(--signal-wash);color:var(--ink);border-radius:1px;}
   .v-side{width:min(300px,86vw);}
 }
 </style>
+<style data-layout="datasheet" media="not all">
+/* Editorial hierarchy, using the document's existing theme tokens. */
+.sheet .scale{display:none;}
+.sheet .masthead{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(180px,max-content);
+  grid-template-areas:"name contact" "title contact";
+  column-gap:2.5rem;
+  align-items:start;
+  padding-top:3.1rem;
+  padding-bottom:1.8rem;
+}
+.sheet .name{
+  grid-area:name;
+  margin:0 0 .65rem;
+  font-size:clamp(3.2rem,6.5vw,4.4rem);
+  font-weight:750;
+  font-stretch:100%;
+  line-height:1;
+  letter-spacing:-.055em;
+}
+.sheet .title-line{
+  grid-area:title;
+  margin:0;
+  max-width:52ch;
+  font-family:var(--f-body);
+  font-size:.9rem;
+  font-weight:500;
+  letter-spacing:.015em;
+  text-transform:none;
+  line-height:1.5;
+  gap:.12em .4em;
+}
+.sheet .contact{
+  grid-area:contact;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:.32rem;
+  padding-top:.25rem;
+  font-family:var(--f-body);
+  font-size:.78rem;
+  line-height:1.45;
+}
+.sheet .contact li{gap:0;overflow-wrap:anywhere;}
+.sheet .contact li::before{display:none;}
+.sheet .contact a{border-bottom-color:var(--rule);}
+.sheet .summary{padding-top:0;padding-bottom:1.4rem;}
+.sheet .summary p{
+  max-width:76ch;
+  font-size:1rem;
+  line-height:1.65;
+  margin-bottom:.75rem;
+}
+.sheet .summary p.positioning{
+  max-width:29ch;
+  margin:0 0 .85rem;
+  font-family:var(--f-display);
+  font-size:clamp(1.65rem,3.4vw,2.25rem);
+  font-weight:650;
+  font-stretch:100%;
+  line-height:1.15;
+  letter-spacing:-.035em;
+  color:var(--ink);
+  text-wrap:balance;
+}
+.sheet .band{
+  display:flex;
+  flex-wrap:wrap;
+  gap:0 1.75rem;
+  margin:0 var(--pad);
+  padding:0 0 .2rem;
+  border-top:1px solid var(--ink);
+  border-bottom:1px solid var(--rule);
+  background:none;
+}
+.sheet .band-cap{
+  flex:0 0 100%;
+  padding:.75rem 0 .55rem;
+  font-size:.59rem;
+  letter-spacing:.12em;
+}
+.sheet .band .metric{
+  flex:1 1 150px;
+  min-width:0;
+  padding:.25rem 0 1rem;
+  border:none;
+}
+.sheet .metric .v{
+  font-size:2rem;
+  font-weight:700;
+  font-stretch:100%;
+  line-height:1.05;
+}
+.sheet .metric .l{
+  max-width:32ch;
+  margin-top:.4rem;
+  font-family:var(--f-body);
+  font-size:.79rem;
+  letter-spacing:0;
+  line-height:1.45;
+  text-transform:none;
+  color:var(--ink-2);
+}
+.sheet .sec-head{
+  margin:2.3rem 0 1rem;
+  padding-bottom:.55rem;
+  border-bottom:1px solid var(--ink);
+}
+.sheet .sec-head h2{
+  font-family:var(--f-mono);
+  font-weight:600;
+  font-size:.7rem;
+  letter-spacing:.15em;
+}
+.sheet .hi{padding:0;border:none;background:none;}
+.sheet .hi h3{letter-spacing:.1em;}
+.sheet .hi ul{gap:.85rem;}
+.sheet .hi li{grid-template-columns:4.5ch minmax(0,1fr);gap:1rem;}
+.sheet .hi li .k{min-width:0;text-align:left;}
+.sheet .role{grid-template-columns:160px minmax(0,1fr);gap:0 2rem;}
+.sheet .role-head h3{font-weight:700;font-stretch:100%;}
+.sheet .role-head .org{font-weight:500;}
+.sheet .role-note{font-family:var(--f-body);font-size:.79rem;letter-spacing:0;}
+.sheet .stacks{gap:.5rem;}
+.sheet .stacks span,.sheet .stacks span.on{
+  padding:0;border:none;background:none;
+  font-size:.65rem;letter-spacing:0;text-transform:none;
+}
+.sheet .role-meta .tag{
+  padding:0;border:none;background:none;
+  font-family:var(--f-body);font-size:.72rem;letter-spacing:0;text-transform:none;
+}
+.sheet .group-head{letter-spacing:.1em;}
+.sheet .group-head::before{display:none;}
+.sheet .cap{grid-template-columns:175px minmax(0,1fr);gap:1.3rem;}
+.sheet .cap dt{letter-spacing:.09em;color:var(--ink-2);}
+.sheet .colophon{
+  grid-template-columns:minmax(0,1.45fr) repeat(2,minmax(0,1fr));
+  gap:1.75rem;
+  background:none;
+  margin-top:2.3rem;
+  padding-top:1.5rem;
+}
+.sheet .colophon h3{color:var(--ink);letter-spacing:.12em;}
+.sheet .colophon .projects .t{font-family:var(--f-display);font-size:1rem;}
+.sheet .colophon .projects li{line-height:1.5;}
+.sheet .colophon .projects .s{margin-top:.25rem;overflow-wrap:anywhere;}
+.sheet.compact:not(.solo) .colophon{grid-template-columns:repeat(2,minmax(0,1fr));}
+.sheet.compact:not(.solo) .colophon .projects{grid-column:1/-1;}
+.sheet.compact:not(.solo) .colophon .projects ul{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  column-gap:1.75rem;
+}
+.sheet.solo .colophon{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);}
+
+@media screen and (max-width:760px){
+  .sheet .masthead{
+    grid-template-columns:minmax(0,1fr);
+    grid-template-areas:"name" "title" "contact";
+    gap:0;
+    padding-top:2rem;
+    padding-bottom:1.7rem;
+  }
+  .sheet .name{font-size:clamp(2.8rem,10vw,4rem);}
+  .sheet .contact{margin-top:1rem;font-size:.82rem;gap:.3rem;}
+  .sheet .summary p.positioning{max-width:27ch;}
+  .sheet .band{gap:0 1.2rem;}
+  .sheet .band .metric{flex-basis:130px;}
+  .sheet .role{grid-template-columns:1fr;gap:0;}
+  .sheet .cap{grid-template-columns:1fr;gap:.2rem;}
+  .sheet .colophon,
+  .sheet.compact:not(.solo) .colophon,
+  .sheet.solo .colophon{grid-template-columns:1fr;}
+  .sheet.compact:not(.solo) .colophon .projects ul{grid-template-columns:1fr;}
+}
+
+@media print{
+  .sheet .masthead{
+    grid-template-columns:minmax(0,1fr) 148pt;
+    column-gap:22pt;
+    padding:0 0 13pt;
+  }
+  .sheet .name{font-size:36pt;margin-bottom:5pt;}
+  .sheet .title-line{font-size:8.2pt;line-height:1.4;max-width:50ch;}
+  .sheet .contact{font-size:8pt;gap:2pt;padding-top:1pt;line-height:1.3;}
+  .sheet .summary{padding-top:0;padding-bottom:8pt;}
+  .sheet .summary p{font-size:9.8pt;line-height:1.48;margin-bottom:6pt;max-width:none;}
+  .sheet .summary p.positioning{
+    font-size:20pt;line-height:1.15;max-width:35ch;margin-bottom:7pt;
+  }
+  .sheet .band{margin:0;padding:0;gap:0 18pt;}
+  .sheet .band-cap{font-size:6.7pt;padding:6pt 0 4pt;}
+  .sheet .band .metric{flex:1 1 100pt;padding:2pt 0 7pt;}
+  .sheet .metric .v{font-size:19pt;}
+  .sheet .metric .l{font-size:8pt;line-height:1.35;max-width:30ch;margin-top:3pt;}
+  .sheet .sec-head{margin:15pt 0 7pt;padding-bottom:4pt;}
+  .sheet .sec-head h2{font-size:8pt;}
+  .sheet .hi{padding:0;}
+  .sheet .hi h3{font-size:7pt;}
+  .sheet .hi ul{gap:6pt;}
+  .sheet .hi li{font-size:9.4pt;line-height:1.45;gap:10pt;}
+  .sheet .hi li .k{font-size:10pt;}
+  .sheet .role{display:block;padding:9pt 0 10pt;}
+  .sheet .role-meta{font-size:7.4pt;line-height:1.4;margin-bottom:4pt;}
+  .sheet .stacks span,.sheet .stacks span.on,.sheet .role-meta .tag{font-size:7pt;}
+  .sheet .role-head h3{font-size:12pt;}
+  .sheet .role-head .org{font-size:10.5pt;}
+  .sheet .role-note{font-size:8pt;margin-bottom:7pt;}
+  .sheet .group-head{font-size:7.3pt;line-height:1.35;margin-bottom:3pt;}
+  .sheet .bullets li{font-size:9.4pt;line-height:1.46;}
+  .sheet .cap{grid-template-columns:130pt minmax(0,1fr);gap:12pt;}
+  .sheet .cap dt{font-size:7.2pt;}
+  .sheet .cap dd{font-size:9pt;line-height:1.45;}
+  .sheet .colophon{
+    margin-top:13pt;padding:10pt 0 0;gap:14pt;
+    grid-template-columns:minmax(0,1.5fr) repeat(2,minmax(0,1fr));
+  }
+  .sheet .colophon h3{font-size:7pt;margin-bottom:5pt;padding-bottom:4pt;}
+  .sheet .colophon li{font-size:8.2pt;line-height:1.4;}
+  .sheet .colophon .s{font-size:7pt;line-height:1.35;letter-spacing:0;}
+  .sheet .colophon .projects .t{font-size:9pt;}
+
+  .sheet.compact .masthead{padding-bottom:9pt;}
+  .sheet.compact .name{font-size:32pt;margin-bottom:4pt;}
+  .sheet.compact .title-line{font-size:8pt;margin-bottom:0;}
+  .sheet.compact .contact{font-size:7.6pt;gap:1.5pt;}
+  .sheet.compact .summary{padding-top:0;padding-bottom:6pt;}
+  .sheet.compact .summary p{font-size:8.7pt;line-height:1.42;margin-bottom:4pt;}
+  .sheet.compact .summary p.positioning{font-size:15pt;line-height:1.15;margin-bottom:5pt;}
+  .sheet.compact .band-cap{font-size:6.5pt;padding:5pt 0 3pt;}
+  .sheet.compact .band .metric{padding:2pt 0 6pt;}
+  .sheet.compact .metric .v{font-size:16pt;}
+  .sheet.compact .metric .l{font-size:7.4pt;line-height:1.3;margin-top:2pt;}
+  .sheet.compact .sec-head{margin:9pt 0 5pt;padding-bottom:3pt;}
+  .sheet.compact .sec-head h2{font-size:7.6pt;}
+  .sheet.compact .role{padding:4pt 0 5pt;}
+  .sheet.compact .role-meta{font-size:6.8pt;margin-bottom:2.5pt;}
+  .sheet.compact .stacks span,.sheet.compact .stacks span.on,
+  .sheet.compact .role-meta .tag{font-size:6.5pt;}
+  .sheet.compact .role-head{gap:5pt;margin-bottom:2pt;}
+  .sheet.compact .role-head h3{font-size:10.5pt;}
+  .sheet.compact .role-head .org{font-size:9.5pt;}
+  .sheet.compact .role-note{font-size:7.5pt;line-height:1.35;margin-bottom:4pt;}
+  .sheet.compact .group{margin-bottom:5pt;}
+  .sheet.compact .group-head{font-size:6.8pt;line-height:1.3;margin-bottom:2pt;}
+  .sheet.compact .bullets{gap:2pt;}
+  .sheet.compact .bullets li{font-size:8.7pt;line-height:1.36;padding-left:10pt;}
+  .sheet.compact .cap{display:block;padding:2pt 0;}
+  .sheet.compact .cap dt{font-size:7pt;line-height:1.35;}
+  .sheet.compact .cap dd{font-size:8.5pt;line-height:1.38;}
+  .sheet.compact .colophon{margin-top:8pt;padding-top:6pt;row-gap:6pt;column-gap:16pt;}
+  .sheet.compact .colophon h3{font-size:6.8pt;margin-bottom:3pt;padding-bottom:3pt;}
+  .sheet.compact .colophon ul{gap:3pt;}
+  .sheet.compact .colophon li{font-size:7.8pt;line-height:1.35;}
+  .sheet.compact .colophon .s{font-size:6.7pt;}
+  .sheet.compact .colophon .projects ul{column-gap:16pt;}
+  .sheet.compact .colophon .projects .t{display:block;font-size:8.5pt;margin-bottom:2pt;}
+  .sheet.compact .colophon .projects .t::after{content:none;}
+  .sheet.compact .colophon .projects .s{display:block;margin-top:2pt;}
+
+  .sheet.solo .masthead{grid-template-columns:minmax(0,1fr) 142pt;padding-bottom:6pt;}
+  .sheet.solo .name{font-size:24pt;margin-bottom:3pt;}
+  .sheet.solo .title-line{font-size:7pt;line-height:1.3;}
+  .sheet.solo .contact{font-size:7pt;line-height:1.2;gap:1pt;}
+  .sheet.solo .summary{padding-top:0;padding-bottom:4pt;}
+  .sheet.solo .summary p{font-size:7.8pt;line-height:1.35;margin-bottom:3pt;}
+  .sheet.solo .summary p.positioning{font-size:12pt;line-height:1.15;margin-bottom:4pt;}
+  .sheet.solo .band-cap{font-size:6pt;padding:4pt 0 2pt;}
+  .sheet.solo .band .metric{padding:1pt 0 4pt;}
+  .sheet.solo .metric .v{font-size:13pt;}
+  .sheet.solo .metric .l{font-size:6.8pt;line-height:1.25;}
+  .sheet.solo .sec-head{margin:6pt 0 3pt;padding-bottom:2pt;}
+  .sheet.solo .sec-head h2{font-size:7pt;}
+  .sheet.solo .role{padding:3pt 0 4pt;}
+  .sheet.solo .role-meta{font-size:6.5pt;margin-bottom:2pt;}
+  .sheet.solo .stacks span,.sheet.solo .stacks span.on,
+  .sheet.solo .role-meta .tag{font-size:6pt;}
+  .sheet.solo .role-head h3{font-size:9pt;}
+  .sheet.solo .role-head .org{font-size:8.5pt;}
+  .sheet.solo .role-note{font-size:7pt;margin-bottom:3pt;}
+  .sheet.solo .group{margin-bottom:3pt;}
+  .sheet.solo .group-head{font-size:6.3pt;margin-bottom:1.5pt;}
+  .sheet.solo .bullets{gap:1.7pt;}
+  .sheet.solo .bullets li{font-size:7.8pt;line-height:1.34;padding-left:9pt;}
+  .sheet.solo .cap{padding:1.5pt 0;}
+  .sheet.solo .cap dt{font-size:6.5pt;}
+  .sheet.solo .cap dd{font-size:7.5pt;line-height:1.32;}
+  .sheet.solo .colophon{margin-top:6pt;padding-top:5pt;column-gap:16pt;}
+  .sheet.solo .colophon li{font-size:7.3pt;line-height:1.3;}
+  .sheet.solo .colophon .projects ul{gap:3pt;}
+  .sheet.solo .colophon .projects .t{display:inline;font-size:7.8pt;margin:0;}
+  .sheet.solo .colophon .projects .t::after{content:"\2002";}
+  .sheet.solo .colophon .projects .s{display:block;margin-top:2pt;}
+  .sheet.solo .colophon .s{font-size:6.3pt;}
+}
+</style>
 <style data-layout="column" media="not all">
 
 
@@ -742,22 +1039,18 @@ mark{background:var(--signal-wash);color:var(--ink);border-radius:1px;}
     </ul>
   </header>
 
-  <section class="band" data-td="3">
-    <p class="band-cap" data-t="0"><span class="n-roles">Five</span> production codebases &mdash; <span class="n-span">six years</span>, <span class="n-from">2020</span> &rarr; present</p>
-    <div class="metric" data-t="0" data-org="licious"><span class="v"><small>#</small>1</span><span class="l">Contributor on Android <em>and</em> on iOS <em>&middot;</em> Licious, team of 63</span></div>
-    <div class="metric" data-t="0"><span class="v">4</span><span class="l">Codebases whose module graph I created</span></div>
-    <div class="metric"><span class="v">20</span><span class="l">Gradle build scripts in the repo <em>&mdash;</em> every one of them mine</span></div>
-    <div class="metric" data-org="wish"><span class="v">8</span><span class="l">Kotlin Multiplatform modules built <em>&middot;</em> Wish</span></div>
-    <div class="metric" data-t="2" data-org="wish"><span class="v">2<small>&rarr;</small>1</span><span class="l">Platform repositories merged into one <em>&middot;</em> Wish</span></div>
-    <div class="metric"><span class="v">7<small> mo</small></span><span class="l">Of error reporting silently broken &mdash; found and fixed</span></div>
-    <div class="metric"><span class="v">26</span><span class="l">Engineers whose pull requests I review</span></div>
-    <div class="metric" data-t="2"><span class="v">5</span><span class="l">Apps shipped to the stores</span></div>
+  <section class="summary" data-td="3">
+    <p class="positioning" data-t="0">I build the platforms mobile teams ship on.</p>
+    <p data-t="0"><span class="n-years">Six</span> years of mobile engineering across Android, iOS and React&nbsp;Native. Created the module architecture of four production codebases and shipped shared infrastructure in Kotlin, Swift and TypeScript.</p>
+    <p>At <strong>Licious</strong>, I am the <strong>#1 contributor to both the Android and iOS codebases</strong> on a team of 63 engineers, having joined for Android. I have migrated a production codebase entirely from Java to Kotlin and independently built two companies&rsquo; chat products.<c data-org="wish"> On contract at <strong>Wish</strong>, I merged the Android and iOS repositories, built their shared <strong>Kotlin Multiplatform layer</strong> and shipped a Compose Multiplatform screen to both app stores.</c></p>
+    <p>Simplified production infrastructure by removing <strong>six third&#8209;party SDKs</strong> and a custom crash handler that concealed failures. Introduced and later removed an entire monitoring vendor through a shared interface, without changing product code.</p>
   </section>
 
-  <section class="summary" data-td="3">
-    <p data-t="0">Mobile engineer, <span class="n-years">six</span> years in, shipping production Kotlin, Swift and TypeScript into the same repository. I build the layer underneath mobile products &mdash; the Gradle build, the React&nbsp;Native runtime, cold&#8209;start instrumentation, the crash programme, the release train<c data-t="3"> &mdash; and I work across all three stacks because that layer does not respect platform boundaries</c>.</p>
-    <p data-t="1" data-join=" ">At <strong>Licious</strong>, India&rsquo;s largest D2C fresh&#8209;meat brand, I am the <strong>single largest contributor to both the Android and the iOS codebases</strong>, on a team of sixty&#8209;three engineers. I was not hired for iOS.<c data-t="3"> The pattern is older than this job: I have created the module graph of four production codebases, taken one of them off Java entirely, and built two companies&rsquo; chat products single&#8209;handed.</c><c data-org="wish"> On contract at <strong>Wish</strong> I merged the company&rsquo;s iOS and Android repositories into one and built the <strong>Kotlin Multiplatform layer between them</strong>, shipping a Compose Multiplatform surface to both app stores from a single source.</c></p>
-    <p>A good share of that is subtraction. <strong>Six third&#8209;party SDKs out of the shipping app</strong>, a homegrown crash handler that was quietly hiding crashes from reporting, an entire monitoring vendor added and taken out again without touching a line of product code. Fewer moving parts, and fewer places for the app to fail without anyone noticing.</p>
+  <section class="band">
+    <p class="band-cap"><span class="n-roles">Five</span> production codebases &mdash; <span class="n-span">six years</span>, <span class="n-from">2020</span> &rarr; present</p>
+    <div class="metric" data-org="licious"><span class="v"><small>#</small>1</span><span class="l">Contributor on both Android and iOS at Licious &middot; team of 63 engineers</span></div>
+    <div class="metric" data-org="licious"><span class="v">12<small>/</small>13</span><span class="l">Licious app modules I created from a 1,679&#8209;file monolith</span></div>
+    <div class="metric" data-org="licious"><span class="v">8</span><span class="l">Other engineers shipped 7 more trackers on my startup package</span></div>
   </section>
 
   <section data-t="3">
@@ -765,14 +1058,14 @@ mark{background:var(--signal-wash);color:var(--ink);border-radius:1px;}
     <div class="hi">
       <h3>The <span class="n-hi">eight</span> I would lead with</h3>
       <ul>
-        <li><span class="k">8&rarr;7</span><span>The only engineer in the Licious repository&rsquo;s history to have raised React&nbsp;Native&rsquo;s version. Eight bumps <strong>0.72.3 &rarr; 0.77.3</strong> shipped to production; a further seven, <strong>0.77.3 &rarr; 0.84.1</strong> including the mandatory <strong>New&nbsp;Architecture cutover</strong>, green on both platforms and awaiting merge.</span></li>
-        <li data-org="wish"><span class="k">2&rarr;1</span><span>Repositories merged into one at <strong>Wish</strong>, then an 8&#8209;module <strong>Kotlin Multiplatform</strong> layer built between them and a <strong>Compose Multiplatform</strong> screen shipped to both stores from one source.</span></li>
-        <li data-org="alle"><span class="k">68%</span><span>Of the 28 Gradle modules in <strong>Alle</strong> are framework&#8209;free JVM libraries with no Android dependency &mdash; the layering enforced by the build graph, not by convention.</span></li>
-        <li><span class="k">3&times;</span><span>Implementations of a single 15&#8209;method observability contract &mdash; Kotlin, Swift, TypeScript &mdash; behind which an entire APM vendor was added and later removed without touching product code.</span></li>
-        <li><span class="k">7 mo</span><span>How long the app had been discarding <strong>100% of its error reports</strong> before they were sent, because of a filter nobody knew was there. I found it and removed it.</span></li>
-        <li data-org="powerplay"><span class="k">0</span><span>Java files left in the <strong>Powerplay</strong> codebase after I migrated it &mdash; <span class="n">1,246</span> Kotlin files across 14 modules.</span></li>
-        <li><span class="k">5</span><span>Release rules encoded as executable policy in the <strong>RevoPush Release Console</strong>, built solo &mdash; login gate, version match, one base release per version, base&#8209;before&#8209;OTA, single&#8209;operation lock.</span></li>
-        <li><span class="k">8</span><span>Other engineers now shipping on the cold&#8209;start measurement package I created at <strong>Licious</strong>, with <span class="n">7</span> further trackers built on it since.</span></li>
+        <li data-tag="rn build platform"><span class="k">8&rarr;7</span><span>React&nbsp;Native upgrades at <strong>Licious</strong>: eight bumps from <strong>0.72.3 &rarr; 0.77.3</strong> shipped to production. A further seven, <strong>0.77.3 &rarr; 0.84.1</strong>, including the mandatory <strong>New&nbsp;Architecture cutover</strong>, are green on the branch on both platforms and awaiting merge.</span></li>
+        <li data-tag="kmp build ui platform" data-org="wish"><span class="k">2&rarr;1</span><span>Repositories merged into one at <strong>Wish</strong>, then an 8&#8209;module <strong>Kotlin Multiplatform</strong> layer built between them and a <strong>Compose Multiplatform</strong> screen shipped to both stores from one source.</span></li>
+        <li data-tag="android build platform" data-org="alle"><span class="k">68%</span><span>Of the 28 Gradle modules in <strong>Alle</strong> are framework&#8209;free JVM libraries with no Android dependency &mdash; the layering enforced by the build graph, not by convention.</span></li>
+        <li data-tag="platform reliability android ios rn"><span class="k">3&times;</span><span>Implementations of a single 15&#8209;method observability contract &mdash; Kotlin, Swift, TypeScript &mdash; behind which an entire APM vendor was added and later removed without touching product code.</span></li>
+        <li data-tag="reliability"><span class="k">7 mo</span><span>Restored error reporting after finding and removing a filter that had silently discarded <strong>100% of reports</strong> for seven months.</span></li>
+        <li data-tag="android build platform" data-org="powerplay"><span class="k">0</span><span>Java files left in the <strong>Powerplay</strong> codebase after I migrated it &mdash; <span class="n">1,246</span> Kotlin files across 14 modules.</span></li>
+        <li data-tag="rn release platform"><span class="k">5</span><span>Release rules encoded as executable policy in the <strong>RevoPush Release Console</strong>, built solo &mdash; login gate, version match, one base release per version, base&#8209;before&#8209;OTA, single&#8209;operation lock.</span></li>
+        <li data-tag="perf platform"><span class="k">8</span><span>Other engineers now shipping on the cold&#8209;start measurement package I created at <strong>Licious</strong>, with <span class="n">7</span> further trackers built on it since.</span></li>
       </ul>
     </div>
   </section>
@@ -790,20 +1083,33 @@ mark{background:var(--signal-wash);color:var(--ink);border-radius:1px;}
         <p class="role-note">D2C fresh meat &amp; seafood commerce &mdash; a hybrid app with Android, iOS and React&nbsp;Native in one repository</p>
 
         <div class="group">
+          <h4 class="group-head" data-t="3">Build Systems &amp; Architecture</h4>
+          <ul class="bullets" data-td="3">
+            <li data-tag="build android" data-t="0"><strong>Authored every Gradle build script and created 12 of the app&rsquo;s 13 modules</strong>, decomposing a 1,679&#8209;file monolith into monitoring, preferences, attribution, in&#8209;app updates and dependency&#8209;injection libraries<c data-t="3">, each paired with a plain&#8209;Kotlin core with no Android dependency</c>.</li>
+            <li data-lead="platform" data-tag="platform build">Replaced a <span class="n">452</span>&#8209;line Groovy build file with a <span class="n">128</span>&#8209;line Kotlin one, so 13 modules across 6 build variants are configured from a single place, and <span class="n">194</span> hand&#8209;maintained settings became one definition the compiler checks &mdash; a wrong environment value is now a build failure rather than a bug found in production.</li>
+            <li data-tag="build" data-t="1" data-join=" "><strong>Owned dependencies on both platforms</strong>: the Android version catalogue, module list and iOS Podfile.</li>
+            <li data-lead="android" data-tag="build android">Landed the Android Gradle Plugin 7&rarr;8 migration as one reviewed change, moving Gradle, Kotlin, Java and the annotation processor at the same time &mdash; absorbing every breaking change by hand across 1,253 Kotlin and 426 Java files, on a branch kept current through four months of everyone else&rsquo;s work.</li>
+            <li data-tag="build android">Deleted the entire local&#8209;database layer &mdash; a hand&#8209;written store and two Room databases across 71 files &mdash; after finding nothing in it needed to survive a restart. Kept the interfaces in place so every place that used it carried on compiling unchanged.</li>
+            <li data-tag="build">Cleared out what the build was still carrying and paying for: three dead build flavours, a Tag Manager container set, already&#8209;broken tests and a checked&#8209;in IDE workspace. Every reference traced before removal &mdash; one purge touched <span class="n">217</span> files without adding a single line.</li>
+            <li data-lead="platform" data-tag="platform build" data-t="2" data-join=" ">Decommissioned six third&#8209;party SDKs outright<c data-t="3"> &mdash; CleverTap alone carried an entire dead notification centre behind it &mdash;</c> while the app kept shipping.</li>
+            <li data-tag="build release">Collapsed three hand&#8209;maintained version declarations across npm, Gradle and Xcode into a single source of truth, propagated automatically into every target and build configuration.</li>
+          </ul>
+        </div>
+        <div class="group">
           <h4 class="group-head" data-t="3">iOS &mdash; hired for Android, now its top contributor</h4>
           <ul class="bullets" data-td="3">
-            <li data-tag="ios" data-t="0"><strong>#1 contributor to the iOS codebase</strong>, and the owner of its build configuration &mdash; the Xcode project and the dependency lockfile are both mine to maintain.</li>
+            <li data-tag="ios" data-t="0"><strong>#1 contributor to the iOS codebase</strong> and owner of its build configuration, including the Xcode project and dependency lockfile.</li>
             <li data-lead="ios" data-tag="ios">Rewrote how the iOS app starts. The launch screen had been a fake image drawn on top of the tab bar; it is now a real first screen the app boots into, which removed a class of bugs where the app was interactive before it looked ready.</li>
             <li data-tag="ios android">Brought two Android systems across to iOS: the startup framework, rebuilt in Swift so that everything the app initialises on launch declares what it depends on and runs in parallel where it can, and the monitoring module, which now records which screen the user was on when a crash happened.</li>
-            <li data-lead="ios" data-tag="ios build" data-t="1" data-join=" ">Got the iOS build running natively on Apple Silicon by removing an obsolete payments library that had been forcing every engineer&rsquo;s simulator into emulation.<c data-t="3"> Also carried Facebook&rsquo;s SDK across four major versions and moved Firebase onto Swift Package Manager.</c></li>
+            <li data-lead="ios" data-tag="ios build" data-t="1" data-join=" ">Enabled native Apple Silicon builds by removing an obsolete payments library that forced iOS simulators into emulation.<c data-t="3"> Also carried Facebook&rsquo;s SDK across four major versions and moved Firebase onto Swift Package Manager.</c></li>
             <li data-tag="ios product">Fixed marketing links on iOS, where five kinds of campaign link opened the app but dropped the user on the home screen instead of the page they had tapped. Routed all <span class="n">7</span> ways the app can be opened through a single path, bringing iOS level with Android.</li>
           </ul>
         </div>
         <div class="group">
           <h4 class="group-head" data-t="3">React Native Platform</h4>
           <ul class="bullets" data-td="3">
-            <li data-tag="rn build" data-t="0"><c data-only="short">The only engineer in the repository&rsquo;s history to have raised React&nbsp;Native&rsquo;s version. </c>Shipped the <span class="n">0.72.3 &rarr; 0.77.3</span> upgrade to production, carrying the whole Android toolchain &mdash; Gradle, Kotlin and the target SDK &mdash; forward inside the same change.</li>
-            <li data-lead="rn" data-tag="rn build" data-t="1" data-join=" ">Authored the follow&#8209;on <span class="n">0.77.3 &rarr; 0.84.1</span> ladder as <span class="n">7</span> independently buildable hops, one per minor<c data-t="3">, each with a written analysis of what broke and why</c> &mdash; including React&nbsp;Native 0.82&rsquo;s mandatory New Architecture migration<c data-t="3">, which no published guide covers for an app like ours, where native code owns the screens and React&nbsp;Native is embedded inside it</c>. Both platforms green on the branch.</li>
+            <li data-tag="rn build" data-t="0">Shipped React&nbsp;Native <span class="n">0.72.3 &rarr; 0.77.3</span> to production, upgrading Gradle, Kotlin and the Android target SDK in the same change.</li>
+            <li data-lead="rn" data-tag="rn build" data-t="1" data-join=" ">Authored the follow&#8209;on <span class="n">0.77.3 &rarr; 0.84.1</span> upgrade as <span class="n">7</span> independently buildable steps<c data-t="3">, each with a written analysis of breaking changes</c>, including React&nbsp;Native 0.82&rsquo;s mandatory New Architecture migration<c data-t="3"> for a hybrid app where native code owns the screens and embeds React&nbsp;Native</c>. Both platforms green on the branch; awaiting merge.</li>
             <li data-lead="platform" data-tag="platform rn build">Found why the JavaScript bundle broke on both platforms after a routine upgrade: a config file had been overwriting the bundler&rsquo;s defaults instead of adding to them, silently dropping <span class="n">17</span> of them. Harmless for two years, fatal the moment the bundler changed how it resolves packages. One&#8209;line fix, with the two obvious alternatives written up and rejected in the commit.</li>
             <li data-lead="rn" data-tag="rn">Built the hosting layer the entire hybrid app runs on &mdash; the code that lets <span class="n">21</span> React&nbsp;Native screens open from native Android and iOS, receive the data they need, and report back what the user did.</li>
             <li data-tag="rn">Replaced the loosely typed hand&#8209;off between native code and React&nbsp;Native with a checked one, so a misspelled key is now a build error instead of a blank screen. The same <span class="n">200</span>&#8209;function contract, written in Kotlin, Swift and TypeScript, covering 36 areas of app state.</li>
@@ -814,8 +1120,8 @@ mark{background:var(--signal-wash);color:var(--ink);border-radius:1px;}
           <h4 class="group-head" data-t="3">Reliability</h4>
           <ul class="bullets" data-td="3">
             <li data-tag="reliability">Ran the crash and app&#8209;freeze programme across all three stacks, over <span class="n">16</span> releases.</li>
-            <li data-tag="reliability" data-t="0">Found that the app had been reporting almost no errors for seven months &mdash; not because there were none, but because a filter in the reporting setup was <strong>silently discarding 100% of them</strong> before they were sent. Removed it, and put all three platforms on one version of the tool.</li>
-            <li data-tag="reliability" data-t="1" data-join=" ">Deleted the app&rsquo;s homegrown crash handler, which caught crashes, quietly restarted the app and hid them from crash reporting, and replaced it with a trail of what the user was doing before the crash.</li>
+            <li data-tag="reliability" data-t="0">Restored error reporting after finding a filter that had <strong>silently discarded 100% of reports</strong> for seven months. Removed the filter and standardised the reporting SDK across Android, iOS and React&nbsp;Native.</li>
+            <li data-tag="reliability" data-t="1" data-join=" ">Replaced a custom crash handler that hid failures with a record of user actions leading up to each crash.</li>
             <li data-tag="reliability android ios">Fixed a startup hang where the splash screen and the JavaScript runtime could both try to hand off to each other at once, leaving the user stuck. Shipped in Kotlin and Swift the same day, and unchanged six months later.</li>
             <li data-tag="reliability">Closed a family of <span class="n">6</span> related crashes at the cause rather than the symptom, and removed a freeze caused by address lookups blocking the main thread &mdash; by replacing the API in all twelve places it was used, rather than patching each caller.</li>
             <li data-tag="reliability">Removed generated startup code that retried ten times on the main thread and wrote user IDs, internal URLs and full experiment data into the device log on every launch.</li>
@@ -824,25 +1130,12 @@ mark{background:var(--signal-wash);color:var(--ink);border-radius:1px;}
         <div class="group">
           <h4 class="group-head" data-t="3">Performance &amp; Observability</h4>
           <ul class="bullets" data-td="3">
-            <li data-lead="platform" data-tag="platform perf" data-t="2"><strong>Eight other engineers have since shipped seven more trackers on the package I created</strong> &mdash; the measurement layer outlived the measurement.</li>
+            <li data-lead="platform" data-tag="platform perf" data-t="2">Created the startup measurement package on which <strong>eight other engineers have since shipped seven additional trackers</strong>.</li>
             <li data-lead="platform" data-tag="platform perf" data-t="2" data-join=" ">Designed one monitoring interface and implemented it <strong>three times &mdash; Kotlin, Swift and TypeScript</strong> &mdash; so that Firebase, Sentry and New&nbsp;Relic sit behind it interchangeably. Proved it by adding New&nbsp;Relic across all three platforms and removing it again four months later<c data-t="3">: the removal touched the monitoring module and nothing else</c>.</li>
             <li data-tag="perf">Built the company&rsquo;s startup&#8209;time measurement platform: <span class="n">5</span> checkpoints from tap to usable screen<c data-t="3">, recorded on two parallel timelines so React&nbsp;Native and native screens could be compared like for like</c>. Written for all three platforms in one change.</li>
             <li data-tag="perf android">Shortened the Android startup path: took the launch animation off it entirely, rebuilt the splash screen and its data layer at less than half their former size, and replaced a hard&#8209;coded minimum splash delay with a value the team can tune remotely.</li>
             <li data-tag="perf android">Killed homepage scroll stutter by deleting 12 per&#8209;widget configuration classes and four pieces of work that ran on the main thread on every scroll, then reusing view instances across <span class="n">111</span> layouts.</li>
             <li data-tag="perf">Instrumented all <span class="n">18</span> homepage widget types individually for render time, and wrote six of the seven things the app initialises at startup &mdash; each reporting its own timing at no cost to the code that calls it.</li>
-          </ul>
-        </div>
-        <div class="group">
-          <h4 class="group-head" data-t="3">Build Systems &amp; Architecture</h4>
-          <ul class="bullets" data-td="3">
-            <li data-tag="build android" data-t="0"><strong>I wrote every Gradle build script in the repository, and created 12 of the 13 modules in the shipped app</strong> &mdash; breaking a 1,679&#8209;file monolith into separate libraries for monitoring, preferences, attribution, in&#8209;app updates and dependency injection<c data-t="3">, each paired with a plain&#8209;Kotlin core that has no Android dependency at all</c>.</li>
-            <li data-lead="platform" data-tag="platform build"><strong>The build layer every other engineer now works against is mine.</strong> Replaced a <span class="n">452</span>&#8209;line Groovy build file with a <span class="n">128</span>&#8209;line Kotlin one, so 13 modules across 6 build variants are configured from a single place, and <span class="n">194</span> hand&#8209;maintained settings became one definition the compiler checks &mdash; a wrong environment value is now a build failure rather than a bug found in production.</li>
-            <li data-tag="build" data-t="1" data-join=" "><strong>Sole owner of the dependency surface on both platforms</strong> &mdash; the Android version catalogue, the module list and the iOS Podfile all change through me.</li>
-            <li data-lead="android" data-tag="build android">Landed the Android Gradle Plugin 7&rarr;8 migration as one reviewed change, moving Gradle, Kotlin, Java and the annotation processor at the same time &mdash; absorbing every breaking change by hand across 1,253 Kotlin and 426 Java files, on a branch kept current through four months of everyone else&rsquo;s work.</li>
-            <li data-tag="build android">Deleted the entire local&#8209;database layer &mdash; a hand&#8209;written store and two Room databases across 71 files &mdash; after finding nothing in it needed to survive a restart. Kept the interfaces in place so every place that used it carried on compiling unchanged.</li>
-            <li data-tag="build">Cleared out what the build was still carrying and paying for: three dead build flavours, a Tag Manager container set, already&#8209;broken tests and a checked&#8209;in IDE workspace. Every reference traced before removal &mdash; one purge touched <span class="n">217</span> files without adding a single line.</li>
-            <li data-lead="platform" data-tag="platform build" data-t="2" data-join=" ">Decommissioned six third&#8209;party SDKs outright<c data-t="3"> &mdash; CleverTap alone carried an entire dead notification centre behind it &mdash;</c> while the app kept shipping.</li>
-            <li data-tag="build release">Collapsed three hand&#8209;maintained version declarations across npm, Gradle and Xcode into a single source of truth, propagated automatically into every target and build configuration.</li>
           </ul>
         </div>
         <div class="group">
@@ -933,7 +1226,7 @@ mark{background:var(--signal-wash);color:var(--ink);border-radius:1px;}
         <div class="group">
           <h4 class="group-head" data-t="3">The AI Stylist</h4>
           <ul class="bullets" data-td="3">
-            <li data-tag="ai product" data-t="1">Built &ldquo;Ask Alle&rdquo;, the product&rsquo;s reason to exist: a streaming AI stylist that renders the answer word by word as it arrives, assembles it into <span class="n">3</span> kinds of rich content block<c data-t="3">, falls back safely if a partial update is malformed</c>, and measures time&#8209;to&#8209;first&#8209;word on every single turn.</li>
+            <li data-tag="ai product" data-t="1">Built &ldquo;Ask Alle&rdquo;, a streaming AI stylist with word&#8209;by&#8209;word responses, <span class="n">3</span> rich&#8209;content block types and time&#8209;to&#8209;first&#8209;word measurement on every turn<c data-t="3">, with safe fallback for malformed partial updates</c>.</li>
             <li data-tag="ai reliability">Made a dropped connection recoverable rather than fatal: any answer cut off mid&#8209;stream is marked as incomplete rather than left hanging, and can be regenerated from where it started &mdash; so a lift ride does not cost the user their answer.</li>
             <li data-tag="ai product ui">Shipped everything around it &mdash; thread history with server&#8209;grouped sections and last&#8209;thread resume, image attachment behind a one&#8209;time privacy acknowledgement, binary feedback that escalates into a server&#8209;defined form, and a paged, tabbed drill&#8209;down from an inline ideas strip into full browse.</li>
           </ul>
@@ -974,7 +1267,7 @@ mark{background:var(--signal-wash);color:var(--ink);border-radius:1px;}
         <div class="group">
           <h4 class="group-head" data-t="3">Feed Media Performance</h4>
           <ul class="bullets" data-td="3">
-            <li data-lead="product" data-tag="product perf" data-t="2">Built the timeline&rsquo;s image prefetcher, which loads images <span class="n">200</span> posts ahead of where the reader is and tops itself up as they scroll<c data-t="3">, requesting each image at the exact size it will be displayed across <span class="n">5</span> media types</c> &mdash; wired into all <span class="n">4</span> feeds: timeline, profile, post detail and search.</li>
+            <li data-tag="product perf" data-t="0">Built image prefetching across all <span class="n">4</span> feeds &mdash; timeline, profile, post detail and search &mdash; loading images <span class="n">200</span> posts ahead and replenishing as users scroll<c data-t="3">, with exact display&#8209;size requests across <span class="n">5</span> media types</c>.</li>
             <li data-tag="perf">Tuned the image caching a media&#8209;heavy timeline actually needs: a <span class="n">50&nbsp;MB</span> memory cache that automatically drops to lower&#8209;quality images on devices running short of memory, a <span class="n">100&nbsp;MB</span> disk cache on a modern HTTP stack, and CDN cache headers honoured rather than ignored.</li>
             <li data-tag="perf" data-t="2" data-join=" ">Put <strong>image&#8209;format negotiation into every request</strong>, so the CDN could start serving smaller modern image formats to a chosen slice of users &mdash; switched on server&#8209;side, per cohort, without shipping an app at all.</li>
           </ul>
@@ -1022,7 +1315,7 @@ mark{background:var(--signal-wash);color:var(--ink);border-radius:1px;}
           <h4 class="group-head" data-t="3">In&#8209;app Chat, Built Alone</h4>
           <ul class="bullets" data-td="3">
             <li data-tag="chat product" data-t="0">Built the <strong>entire in&#8209;app chat product single&#8209;handed</strong> &mdash; its own module covering <span class="n">7</span> screens and 6 kinds of message, localised into <span class="n">12</span> Indian languages.</li>
-            <li data-tag="chat product" data-t="1" data-join=" ">Delivered the depth people silently expect from WhatsApp: typing indicators, read <em>and</em> delivery receipts with per&#8209;message tri&#8209;state ticks<c data-t="3">, a read/unread/not&#8209;yet&#8209;installed message&#8209;info screen, @mentions paged over Sendbird&rsquo;s member&#8209;search endpoint, swipe&#8209;to&#8209;reply, multi&#8209;channel forwarding</c>, and soft and hard delete.</li>
+            <li data-tag="chat product" data-t="1" data-join=" ">Implemented typing indicators, read <em>and</em> delivery receipts with per&#8209;message tri&#8209;state ticks<c data-t="3">, a read/unread/not&#8209;yet&#8209;installed message&#8209;info screen, @mentions paged over Sendbird&rsquo;s member&#8209;search endpoint, swipe&#8209;to&#8209;reply, multi&#8209;channel forwarding</c>, and soft and hard delete.</li>
             <li data-tag="chat reliability">Made it survive bad networks and the app being killed in the background: nothing loads against a dead connection, delivery receipts are sent reliably whether the app is open or not, and push notifications route correctly from all three systems that could send them.</li>
             <li data-tag="chat product">Modelled <span class="n">5</span> construction&#8209;specific message types &mdash; task, material request, progress report, image and system &mdash; as structured messages, so a site update arrives as something the app can render and act on rather than a paragraph of text.</li>
           </ul>
@@ -1032,7 +1325,7 @@ mark{background:var(--signal-wash);color:var(--ink);border-radius:1px;}
           <h4 class="group-head" data-t="3">Growth, Onboarding &amp; Experiments</h4>
           <ul class="bullets" data-td="3">
             <li data-tag="product analytics">Built the onboarding flow end to end and rebuilt it as the product learned: a questionnaire whose length and validation the backend controls, and a submit path that reports success to all four analytics vendors, replays whatever events the server names, and refreshes configuration so a new user lands in the right experiment immediately.</li>
-            <li data-tag="product analytics" data-t="0"><strong>Built the attribution behind the campaign that took the product to 50,000 users in one month:</strong> Play Install Referrer captured exactly once per user, UTM parameters decoded into their own store, and the acquisition source then attached automatically to all <span class="n">1,308</span> places the app records an event.<c data-t="3"> Outbound, UTM&#8209;tagged dynamic links carry the same parameters back through the Play Store install, closing the loop.</c></li>
+            <li data-tag="product analytics" data-t="0"><strong>Built the attribution behind the campaign that took the product to 50,000 users in one month:</strong> captured Play Install Referrer once per user, stored UTM parameters and automatically attached acquisition source to all <span class="n">1,308</span> analytics call sites.<c data-t="3"> Outbound, UTM&#8209;tagged dynamic links carry the same parameters back through the Play Store install, closing the loop.</c></li>
             <li data-lead="product" data-tag="product analytics">Ran experimentation as a platform, not a habit: <span class="n">61</span> feature flags across five product teams, with a global hold&#8209;out group and automatic exposure tracking so every experiment is analysable without extra work &mdash; and a registry of 45 experiments, 14 live and 31 retired with written reasoning.</li>
             <li data-tag="release" data-t="1" data-join=" ">Owned the weekly release train and the on&#8209;call rotation, driving the app to <strong>version 547</strong><c data-t="3"> against a pipeline that built every pull request and posted an installable build straight into the team&rsquo;s Slack channel on merge</c>.</li>
           </ul>
@@ -1044,39 +1337,58 @@ mark{background:var(--signal-wash);color:var(--ink);border-radius:1px;}
   <section>
     <div class="sec-head"><h2>Capabilities</h2></div>
     <dl class="caps">
-      <div class="cap">
+      <c data-only="short one">
+        <div class="cap">
+          <dt>Languages</dt>
+          <dd><b>Kotlin</b><i>&middot;</i><b>Swift</b><i>&middot;</i><b>TypeScript</b></dd>
+        </div>
+        <div class="cap">
+          <dt>Mobile</dt>
+          <dd>Jetpack Compose<i>&middot;</i>UIKit / SwiftUI<i>&middot;</i>React Native<i>&middot;</i>Kotlin / Compose Multiplatform</dd>
+        </div>
+        <div class="cap">
+          <dt>Platform</dt>
+          <dd>Multi&#8209;module Gradle<i>&middot;</i>React Native in native apps<i>&middot;</i>Ktor<i>&middot;</i>SPM / CocoaPods</dd>
+        </div>
+        <div class="cap">
+          <dt>Reliability &amp; Delivery</dt>
+          <dd>Startup / ANR profiling<i>&middot;</i>Sentry / Crashlytics<i>&middot;</i>Fastlane<i>&middot;</i>GitHub Actions<i>&middot;</i>OTA guardrails</dd>
+        </div>
+      </c>
+
+      <div class="cap" data-t="3">
         <dt>Languages</dt>
         <dd><b>Kotlin</b><i>&middot;</i><b>Swift</b><i>&middot;</i><b>TypeScript</b> &mdash; production<i>&middot;</i>Java<i>&middot;</i>Objective-C<i>&middot;</i>Groovy / Gradle&nbsp;KTS &mdash; read, maintain, migrate off</dd>
       </div>
-      <div class="cap">
+      <div class="cap" data-t="3">
         <dt>Android</dt>
-        <dd>Jetpack Compose<i>&middot;</i>Coroutines &amp; Flow<i>&middot;</i>Hilt<i>&middot;</i>Dagger multibinding<i>&middot;</i>Koin<i>&middot;</i>Room<i>&middot;</i>DataStore<i>&middot;</i>WorkManager<i>&middot;</i>Paging&nbsp;3<i>&middot;</i>Navigation<i>&middot;</i>App&nbsp;Startup<i>&middot;</i>Data Binding<i>&middot;</i>Media3 &amp; ExoPlayer<i>&middot;</i>CameraX<i>&middot;</i>Coil / Glide<i>&middot;</i>R8<i>&middot;</i>Baseline&nbsp;Profiles<i>&middot;</i>NDK &amp; 16&nbsp;KB page alignment</dd>
+        <dd>Jetpack Compose<i>&middot;</i>Coroutines &amp; Flow<i>&middot;</i>Hilt<c data-t="1"><i>&middot;</i>Dagger multibinding<i>&middot;</i>Koin</c><i>&middot;</i>Room<i>&middot;</i>DataStore<i>&middot;</i>WorkManager<c data-t="1"><i>&middot;</i>Paging&nbsp;3<i>&middot;</i>Navigation<i>&middot;</i>App&nbsp;Startup<i>&middot;</i>Data Binding<i>&middot;</i>Media3 &amp; ExoPlayer<i>&middot;</i>CameraX<i>&middot;</i>Coil / Glide<i>&middot;</i>R8<i>&middot;</i>Baseline&nbsp;Profiles<i>&middot;</i>NDK &amp; 16&nbsp;KB page alignment</c></dd>
       </div>
-      <div class="cap" data-t="1">
+      <div class="cap" data-t="3">
         <dt>iOS</dt>
-        <dd>Swift<i>&middot;</i>UIKit<i>&middot;</i>SwiftUI<i>&middot;</i>Combine<i>&middot;</i>Swift concurrency &amp; actors<i>&middot;</i>CocoaPods<i>&middot;</i>Swift Package Manager<i>&middot;</i>XCFrameworks<i>&middot;</i>xcodeproj surgery<i>&middot;</i>App&nbsp;Store Connect &amp; TestFlight<i>&middot;</i>App Tracking Transparency</dd>
+        <dd>Swift<i>&middot;</i>UIKit<i>&middot;</i>SwiftUI<i>&middot;</i>Combine<i>&middot;</i>Swift concurrency &amp; actors<i>&middot;</i>CocoaPods<i>&middot;</i>Swift Package Manager<i>&middot;</i>XCFrameworks<i>&middot;</i>Xcode project configuration<i>&middot;</i>App&nbsp;Store Connect &amp; TestFlight<i>&middot;</i>App Tracking Transparency</dd>
       </div>
-      <div class="cap">
+      <div class="cap" data-t="3">
         <dt>Kotlin Multiplatform</dt>
-        <dd>commonMain / androidMain / iosMain<i>&middot;</i><code>expect</code> &amp; <code>actual</code><i>&middot;</i><b>Compose Multiplatform</b><i>&middot;</i>Ktor client<i>&middot;</i>kotlinx&#8209;serialization<i>&middot;</i>BuildKonfig<i>&middot;</i>SPM &amp; CocoaPods framework bridging<i>&middot;</i>native SDK wrappers on both platforms</dd>
+        <dd><c data-t="1">commonMain / androidMain / iosMain<i>&middot;</i><code>expect</code> &amp; <code>actual</code><i>&middot;</i></c><b>Compose Multiplatform</b><i>&middot;</i>Ktor client<i>&middot;</i>kotlinx&#8209;serialization<c data-t="1"><i>&middot;</i>BuildKonfig<i>&middot;</i>SPM &amp; CocoaPods framework bridging<i>&middot;</i>native SDK wrappers on both platforms</c></dd>
       </div>
-      <div class="cap">
+      <div class="cap" data-t="3">
         <dt>React Native</dt>
         <dd>Native modules &amp; view managers<i>&middot;</i>RN&#8209;in&#8209;native hosting<i>&middot;</i>Hermes<i>&middot;</i>Metro<i>&middot;</i>Fabric &amp; TurboModules<i>&middot;</i>Reanimated<i>&middot;</i>Zustand<i>&middot;</i>TanStack Query<i>&middot;</i>CodePush / OTA delivery<i>&middot;</i>patch-package</dd>
       </div>
-      <div class="cap" data-t="1">
+      <div class="cap" data-t="3">
         <dt>Architecture</dt>
         <dd>Multi&#8209;module Gradle<i>&middot;</i>Clean architecture &amp; ports/adapters<i>&middot;</i>MVVM / MVI<i>&middot;</i>Dependency injection<i>&middot;</i>Domain layers with zero framework coupling<i>&middot;</i>Server&#8209;driven UI &amp; forms<i>&middot;</i>Feature flags &amp; A/B experimentation<i>&middot;</i>Hybrid native&#8209;to&#8209;RN navigation<i>&middot;</i>Monorepo migration</dd>
       </div>
-      <div class="cap" data-t="1">
+      <div class="cap" data-t="3">
         <dt><c data-only="full">Performance &amp; Observability</c><c data-only="short">Observability</c></dt>
         <dd>Firebase Performance custom traces<i>&middot;</i>react-native-performance<i>&middot;</i>New&nbsp;Relic<i>&middot;</i>Sentry<i>&middot;</i>Crashlytics<i>&middot;</i>LeakCanary<i>&middot;</i>StrictMode<i>&middot;</i>Perfetto &amp; systrace<i>&middot;</i>Instruments<i>&middot;</i>cold&#8209;start, jank, ANR and memory profiling<i>&middot;</i>CDN image pipelines &amp; cache tuning</dd>
       </div>
-      <div class="cap" data-t="1">
+      <div class="cap" data-t="3">
         <dt>Build &amp; Release</dt>
         <dd>Gradle convention plugins &amp; version catalogues<i>&middot;</i>buildSrc<i>&middot;</i>Product flavours &amp; build types<i>&middot;</i>kapt&nbsp;&rarr;&nbsp;KSP<i>&middot;</i>CocoaPods post&#8209;integrate hooks<i>&middot;</i>Fastlane<i>&middot;</i>TeamCity &amp; GitHub Actions<i>&middot;</i>Play&nbsp;Console &amp; TestFlight<i>&middot;</i>Release trains &amp; hotfixes<i>&middot;</i>OTA rollout guardrails</dd>
       </div>
-      <div class="cap" data-t="1">
+      <div class="cap" data-t="3">
         <dt><c data-only="full">Vendor SDKs &mdash; integrated, abstracted, removed</c><c data-only="short">Vendor SDKs</c></dt>
         <dd>AppsFlyer<i>&middot;</i>Adjust<i>&middot;</i>CleverTap<i>&middot;</i>MoEngage<i>&middot;</i>WebEngage<i>&middot;</i>Firebase<i>&middot;</i>Segment<i>&middot;</i>Mixpanel<i>&middot;</i>Amplitude<i>&middot;</i>Juspay HyperSDK<i>&middot;</i>Razorpay<i>&middot;</i>Braintree<i>&middot;</i>PayPal<i>&middot;</i>Klarna<i>&middot;</i>Amazon&nbsp;Pay<i>&middot;</i>Simpl<i>&middot;</i>Truecaller<i>&middot;</i>Sendbird<i>&middot;</i>Google&nbsp;Maps<i>&middot;</i>Facebook</dd>
       </div>
@@ -1084,6 +1396,14 @@ mark{background:var(--signal-wash);color:var(--ink);border-radius:1px;}
   </section>
 
   <footer class="colophon">
+    <div class="projects">
+      <h3>Projects</h3>
+      <ul>
+        <li><span class="t">DOOM</span><c>The 1993 original ported to <b>Kotlin Multiplatform</b> &mdash; one Compose codebase running on Android, iOS, desktop JVM and the web through WebAssembly</c><span class="s"><a href="https://github.com/kunal26das/doom">github.com/kunal26das/doom</a></span></li>
+        <li data-t="1"><span class="t">Multidex</span><c data-t="1">Offline&#8209;first Pok&eacute;dex &mdash; <b>Kotlin Multiplatform</b> and Compose, one codebase shipping to Android, iOS and desktop</c><span class="s"><a href="https://play.google.com/store/apps/details?id=io.github.kunal26das.multidex">Google Play</a></span></li>
+        <li data-t="3"><span class="t">Yify</span><c data-t="3">Movie catalogue with search, filters and in&#8209;app trailers &mdash; <b>React&nbsp;Native</b> on Expo, layered the same way as my production work</c><span class="s"><a href="https://play.google.com/store/apps/details?id=io.github.kunal26das.yify">Google Play</a> &#183; <a href="https://kunal26das.github.io/yify/">Web</a> &#183; <a href="https://github.com/kunal26das/yify">Source</a></span></li>
+      </ul>
+    </div>
     <div>
       <h3>Education</h3>
       <ul>
@@ -1100,7 +1420,7 @@ mark{background:var(--signal-wash);color:var(--ink);border-radius:1px;}
         <li><span class="t">SOLID Principles</span><span class="s">Udemy</span></li>
       </ul>
     </div>
-    <div>
+    <div data-t="1">
       <h3>Shipped</h3>
       <ul>
         <li data-org="licious"><span class="t">Licious</span><span class="s"><a href="https://play.google.com/store/apps/details?id=com.licious">Google Play</a> &#183; <a href="https://apps.apple.com/in/app/licious-chicken-fish-meat/id1052440342">App Store</a></span></li>
@@ -1108,14 +1428,6 @@ mark{background:var(--signal-wash);color:var(--ink);border-radius:1px;}
         <li data-org="powerplay"><span class="t">Powerplay</span><span class="s"><a href="https://play.google.com/store/apps/details?id=in.powerplay.android.fieldapp">Google Play</a></span></li>
         <li data-org="alle"><span class="t">Alle &#8212; AI Fashion Stylist</span><span class="s">Android &#183; discontinued</span></li>
         <li data-org="koo"><span class="t">Koo</span><span class="s">Android &#183; discontinued</span></li>
-      </ul>
-    </div>
-    <div>
-      <h3 data-t="1">Projects</h3>
-      <ul data-t="1">
-        <li data-t="1"><span class="t">DOOM</span><c data-t="3">The 1993 original ported to <b>Kotlin Multiplatform</b> &mdash; one Compose codebase running on Android, iOS, desktop JVM and the web through WebAssembly</c><span class="s"><a href="https://github.com/kunal26das/doom">github.com/kunal26das/doom</a></span></li>
-        <li data-t="1"><span class="t">Multidex</span><c data-t="3">Offline&#8209;first Pok&eacute;dex &mdash; <b>Kotlin Multiplatform</b> and Compose, one codebase shipping to Android, iOS and desktop</c><span class="s"><a href="https://play.google.com/store/apps/details?id=io.github.kunal26das.multidex">Google Play</a></span></li>
-        <li data-t="1"><span class="t">Yify</span><c data-t="3">Movie catalogue with search, filters and in&#8209;app trailers &mdash; <b>React&nbsp;Native</b> on Expo, layered the same way as my production work</c><span class="s"><a href="https://play.google.com/store/apps/details?id=io.github.kunal26das.yify">Google Play</a> &#183; <a href="https://kunal26das.github.io/yify/">Web</a> &#183; <a href="https://github.com/kunal26das/yify">Source</a></span></li>
       </ul>
     </div>
   </footer>
@@ -1139,13 +1451,15 @@ mark{background:var(--signal-wash);color:var(--ink);border-radius:1px;}
   };
   var COUNTRY = { India: "IN" };
 
-  function plain(text) {
+  function normalised(text) {
     var s = text === null || text === undefined ? "" : String(text), i;
     for (i = 0; i < NORMALISE.length; i++) {
       s = s.split(NORMALISE[i][0]).join(NORMALISE[i][1]);
     }
-    return s.replace(/\s+/g, " ").trim();
+    return s.replace(/\s+/g, " ");
   }
+
+  function plain(text) { return normalised(text).trim(); }
 
   function nonEmpty(s) { return !!s; }
 
@@ -1198,6 +1512,57 @@ mark{background:var(--signal-wash);color:var(--ink);border-radius:1px;}
     return list(el.querySelectorAll("a")).map(function (a) {
       return a.getAttribute("href");
     });
+  }
+
+  function inlineRuns(el, omit) {
+    var runs = [];
+    function visit(node, href) {
+      if (node.nodeType === 1) {
+        if (tagged(node, omit || [])) return;
+        if (node.tagName === "A") href = node.getAttribute("href") || href;
+        list(node.childNodes).forEach(function (child) { visit(child, href); });
+      } else if (node.nodeType === 3) {
+        var previous = runs[runs.length - 1];
+        if (previous && previous.href === href) previous.text += node.textContent;
+        else runs.push({ text: node.textContent, href: href });
+      }
+    }
+    if (el) list(el.childNodes).forEach(function (node) { visit(node, null); });
+    var previous = "";
+    runs.forEach(function (run) {
+      run.text = normalised(run.text);
+      if (!previous || previous.slice(-1) === " ") run.text = run.text.replace(/^ +/, "");
+      if (run.text) previous = run.text;
+    });
+    runs = runs.filter(function (run) { return !!run.text; });
+    if (runs.length) runs[runs.length - 1].text = runs[runs.length - 1].text.replace(/ +$/, "");
+    return runs.filter(function (run) { return !!run.text; });
+  }
+
+  function colophonRuns(item, separator) {
+    var out = [];
+    ["title", "text", "sub"].forEach(function (field) {
+      var runs = item.runs ? item.runs[field] : [{ text: item[field], href: null }];
+      if (!item[field]) return;
+      if (out.length) out.push({ text: separator, href: null });
+      push(out, runs);
+    });
+    return out;
+  }
+
+  function textRun(run) {
+    if (!run.href) return run.text;
+    var label = run.text.trim();
+    var text = label === run.href || label === run.href.replace(/^https?:\/\//, "") ?
+      run.href : label + ": " + run.href;
+    return run.text.match(/^ */)[0] + text + run.text.match(/ *$/)[0];
+  }
+
+  function markdownText(text) { return text.replace(/[\\[\]`*_<>]/g, "\\$&"); }
+
+  function markdownRun(run) {
+    var label = markdownText(run.text);
+    return run.href ? "[" + label + "](" + run.href.replace(/[\s()<>]/g, encodeURIComponent) + ")" : label;
   }
 
   function capabilityValues(dd) {
@@ -1289,7 +1654,12 @@ mark{background:var(--signal-wash);color:var(--ink);border-radius:1px;}
       title: textOf(li.querySelector("span.t")),
       text: textWithout(li, ["t", "s"]),
       sub: textOf(li.querySelector("span.s")),
-      links: hrefs(li)
+      links: hrefs(li),
+      runs: {
+        title: inlineRuns(li.querySelector("span.t")),
+        text: inlineRuns(li, ["t", "s"]),
+        sub: inlineRuns(li.querySelector("span.s"))
+      }
     };
   }
 
@@ -1370,6 +1740,13 @@ mark{background:var(--signal-wash);color:var(--ink);border-radius:1px;}
   function splitChunks(text) {
     var out = [], i = 0, n = text.length, j, p;
     while (i < n) {
+      if (/^https?:\/\//.test(text.slice(i))) {
+        j = i;
+        while (j < n && !isSpace(text.charAt(j))) j++;
+        out.push(text.slice(i, j));
+        i = j;
+        continue;
+      }
       if (isSpace(text.charAt(i))) {
         j = i;
         while (j < n && isSpace(text.charAt(j))) j++;
@@ -1424,7 +1801,9 @@ mark{background:var(--signal-wash);color:var(--ink);border-radius:1px;}
         line.push(chunks.pop());
       }
       if (chunks.length && chunks[chunks.length - 1].length > room) {
-        breakLongWord(chunks, line, used, room);
+        if (/^https?:\/\//.test(chunks[chunks.length - 1])) {
+          if (!used) line.push(chunks.pop());
+        } else breakLongWord(chunks, line, used, room);
         used = 0;
         for (i = 0; i < line.length; i++) used += line[i].length;
       }
@@ -1498,8 +1877,7 @@ mark{background:var(--signal-wash);color:var(--ink);border-radius:1px;}
     doc.colophon.forEach(function (col) {
       push(out, ["", rule, col.heading.toUpperCase(), rule]);
       col.items.forEach(function (item) {
-        var line = "  " + [item.title, item.text, item.sub]
-          .filter(nonEmpty).join(" - ");
+        var line = "  " + colophonRuns(item, " - ").map(textRun).join("");
         push(out, wrap(line, w, "    "));
       });
     });
@@ -1556,7 +1934,11 @@ mark{background:var(--signal-wash);color:var(--ink);border-radius:1px;}
     doc.colophon.forEach(function (col) {
       push(out, ["## " + col.heading, ""]);
       col.items.forEach(function (item) {
-        var bits = [item.title ? "**" + item.title + "**" : "", item.text, item.sub];
+        var bits = ["title", "text", "sub"].map(function (field) {
+          var runs = item.runs ? item.runs[field] : [{ text: item[field], href: null }];
+          var text = runs.map(markdownRun).join("");
+          return field === "title" && text ? "**" + text + "**" : text;
+        });
         out.push("- " + bits.filter(nonEmpty).join(" " + EMDASH + " "));
       });
       out.push("");
@@ -1731,12 +2113,20 @@ mark{background:var(--signal-wash);color:var(--ink);border-radius:1px;}
     "</Relationships>"
   ].join("\n");
 
-  var DOC_RELS = [
-    '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>',
-    '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">',
-    '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/>',
-    "</Relationships>"
-  ].join("\n");
+  function documentRels(links) {
+    var parts = [
+      '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>',
+      '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">',
+      '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/>'
+    ];
+    links.forEach(function (href, i) {
+      parts.push('<Relationship Id="rId' + (i + 2) +
+        '" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink"' +
+        ' Target="' + esc(href).replace(/"/g, "&quot;") + '" TargetMode="External"/>');
+    });
+    parts.push("</Relationships>");
+    return parts.join("\n");
+  }
 
   function style(id, name, size, opt) {
     var o = opt || {};
@@ -1772,17 +2162,32 @@ mark{background:var(--signal-wash);color:var(--ink);border-radius:1px;}
     return text.split("&").join("&amp;").split("<").join("&lt;").split(">").join("&gt;");
   }
 
-  function para(text, name, bullet) {
-    var ind = bullet ? '<w:ind w:left="360" w:hanging="180"/>' : "";
-    var body = bullet ? BULLET + EMSPACE + text : text;
-    return '<w:p><w:pPr><w:pStyle w:val="' + (name || "Body") + '"/>' + ind + "</w:pPr>" +
-      '<w:r><w:t xml:space="preserve">' + esc(body) + "</w:t></w:r></w:p>";
+  function wordRun(run, links) {
+    var properties = run.href ? '<w:rPr><w:color w:val="0563C1"/><w:u w:val="single"/></w:rPr>' : "";
+    var body = '<w:r>' + properties + '<w:t xml:space="preserve">' + esc(run.text) + '</w:t></w:r>';
+    if (!run.href) return body;
+    var at = links.indexOf(run.href);
+    if (at < 0) { at = links.length; links.push(run.href); }
+    return '<w:hyperlink r:id="rId' + (at + 2) + '" w:history="1">' + body + '</w:hyperlink>';
   }
 
-  function documentXml(doc) {
+  function para(text, name, bullet, links) {
+    var ind = bullet ? '<w:ind w:left="360" w:hanging="180"/>' : "";
+    var runs = typeof text === "string" ? [{ text: text, href: null }] : text.slice();
+    if (bullet) runs.unshift({ text: BULLET + EMSPACE, href: null });
+    var body = runs.map(function (run) { return wordRun(run, links); }).join("");
+    return '<w:p><w:pPr><w:pStyle w:val="' + (name || "Body") + '"/>' + ind + "</w:pPr>" +
+      body + "</w:p>";
+  }
+
+  function documentXml(doc, links) {
+    var contact = [];
+    doc.contact.forEach(function (item, i) {
+      if (i) contact.push({ text: "  |  ", href: null });
+      contact.push(item);
+    });
     var parts = [para(doc.name, "Title"), para(doc.title, "Subtitle"),
-                 para(doc.contact.map(function (c) { return c.text; }).join("  |  "),
-                      "Contact")];
+                 para(contact, "Contact", false, links)];
 
     parts.push(para("Profile", "Heading1"));
     push(parts, doc.summary.map(function (p) { return para(p, "Body"); }));
@@ -1823,13 +2228,13 @@ mark{background:var(--signal-wash);color:var(--ink);border-radius:1px;}
     doc.colophon.forEach(function (col) {
       parts.push(para(col.heading, "Heading1"));
       col.items.forEach(function (item) {
-        parts.push(para([item.title, item.text, item.sub]
-          .filter(nonEmpty).join(" " + EMDASH + " "), "Body", true));
+        parts.push(para(colophonRuns(item, " " + EMDASH + " "), "Body", true, links));
       });
     });
 
     return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n' +
-      '<w:document xmlns:w="' + W + '"><w:body>' + parts.join("") +
+      '<w:document xmlns:w="' + W +
+      '" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><w:body>' + parts.join("") +
       '<w:sectPr><w:pgSz w:w="11906" w:h="16838"/>' +
       '<w:pgMar w:top="720" w:right="720" w:bottom="720" w:left="720"/>' +
       "</w:sectPr></w:body></w:document>";
@@ -1934,12 +2339,13 @@ mark{background:var(--signal-wash);color:var(--ink);border-radius:1px;}
   }
 
   function toDocx(doc) {
+    var links = [], document = documentXml(doc, links);
     return zip([
       ["[Content_Types].xml", CONTENT_TYPES],
       ["_rels/.rels", RELS],
-      ["word/_rels/document.xml.rels", DOC_RELS],
+      ["word/_rels/document.xml.rels", documentRels(links)],
       ["word/styles.xml", STYLES],
-      ["word/document.xml", documentXml(doc)]
+      ["word/document.xml", document]
     ]);
   }
 
@@ -2008,15 +2414,16 @@ mark{background:var(--signal-wash);color:var(--ink);border-radius:1px;}
 
   var MASTER = null, MOUNT = null, PANEL = null, JUMPS = [];
   var ORGS = [], TOPICS = [], STEM = "resume";
-  var cfg = null, stats = { shown: 0, total: 0 }, timer = null, ticking = false;
+  var cfg = null, sourceDefaults = null;
+  var stats = { shown: 0, total: 0 }, timer = null, ticking = false;
 
   function defaults() {
-    var el = document.documentElement, off = [];
+    var off = [];
     ORGS.forEach(function (o) { if (o.off) off.push(o.slug); });
     return {
-      len: el.getAttribute("data-len") || "full",
-      layout: el.getAttribute("data-layout") || "datasheet",
-      lead: el.getAttribute("data-lead") || "",
+      len: sourceDefaults.len,
+      layout: sourceDefaults.layout,
+      lead: sourceDefaults.lead,
       theme: "auto", contact: "hide", hide: off,
       only: [], q: ""
     };
@@ -2380,8 +2787,9 @@ mark{background:var(--signal-wash);color:var(--ink);border-radius:1px;}
     PANEL = document.createElement("div");
     PANEL.className = "v-ui";
     PANEL.innerHTML =
-      '<button type="button" class="v-toggle" data-group="panel">Filter</button>' +
-      '<aside class="v-side" aria-label="Versions">' +
+      '<button type="button" class="v-toggle" data-group="panel"' +
+      ' aria-controls="resume-versions-panel" aria-expanded="false">Filter</button>' +
+      '<aside id="resume-versions-panel" class="v-side" aria-label="Versions">' +
       '<div class="v-head"><span class="v-title">Versions</span>' +
       '<button type="button" class="v-btn v-hide" data-group="panel">Hide</button>' +
       '<span class="v-now"></span></div>' +
@@ -2551,7 +2959,7 @@ mark{background:var(--signal-wash);color:var(--ink);border-radius:1px;}
       return;
     }
     apply(function () {
-      if (g === "reset") cfg = defaults();
+      if (g === "reset") { cancelPendingSearch(); cfg = defaults(); }
       else if (g === "org") toggle(cfg.hide, v);
       else if (g === "topic") toggle(cfg.only, v);
       else if (g === "all-topics") cfg.only = [];
@@ -2560,11 +2968,17 @@ mark{background:var(--signal-wash);color:var(--ink);border-radius:1px;}
     }, g === "reset");
   }
 
+  function cancelPendingSearch() {
+    clearTimeout(timer);
+    timer = null;
+  }
+
   function onInput(e) {
     if (e.target.getAttribute("data-field") !== "q") return;
-    clearTimeout(timer);
+    cancelPendingSearch();
     var val = e.target.value;
     timer = setTimeout(function () {
+      timer = null;
       apply(function () { cfg.q = val.slice(0, 80); });
     }, 200);
   }
@@ -2597,14 +3011,28 @@ mark{background:var(--signal-wash);color:var(--ink);border-radius:1px;}
     });
   }
 
-  function setPanel(open) {
+  function setPanel(open, manageFocus) {
+    var side = PANEL.querySelector(".v-side"), toggle = PANEL.querySelector(".v-toggle");
+    var wasInside = side.contains(document.activeElement);
     document.documentElement.setAttribute("data-panel", open ? "open" : "closed");
+    side.inert = !open;
+    toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    if (manageFocus !== false) {
+      if (open) side.querySelector(".v-hide").focus({ preventScroll: true });
+      else if (wasInside) toggle.focus({ preventScroll: true });
+    }
     try { localStorage.setItem("resume-panel", open ? "open" : "closed"); } catch (e) {}
   }
 
   function init() {
     var sheet = document.querySelector(".sheet");
     if (!sheet) return;
+    var el = document.documentElement;
+    sourceDefaults = {
+      len: el.getAttribute("data-len") || "full",
+      layout: el.getAttribute("data-layout") || "datasheet",
+      lead: el.getAttribute("data-lead") || ""
+    };
     MASTER = sheet.cloneNode(true);
     discover();
     cfg = read();
@@ -2615,7 +3043,10 @@ mark{background:var(--signal-wash);color:var(--ink);border-radius:1px;}
           document.documentElement.getAttribute("data-panel") === "open") setPanel(false);
     });
     document.addEventListener("input", onInput);
-    window.addEventListener("popstate", function () { cfg = read(); render(); update(true); });
+    window.addEventListener("popstate", function () {
+      cancelPendingSearch();
+      cfg = read(); render(); update(true);
+    });
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
     window.addEventListener("beforeprint", function () { reveal(document); });
@@ -2625,7 +3056,7 @@ mark{background:var(--signal-wash);color:var(--ink);border-radius:1px;}
     document.documentElement.setAttribute("data-versions", "on");
     var saved = null;
     try { saved = localStorage.getItem("resume-panel"); } catch (e) {}
-    setPanel(saved ? saved === "open" : window.innerWidth >= 1180);
+    setPanel(saved ? saved === "open" : window.innerWidth >= 1180, false);
     render();
     update(true);
   }
@@ -2636,6 +3067,7 @@ mark{background:var(--signal-wash);color:var(--ink);border-radius:1px;}
 
   window.__versions = {
     apply: function (c) {
+      cancelPendingSearch();
       cfg = Object.assign(defaults(), c);
       render();
       update(true);
